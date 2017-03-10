@@ -20,6 +20,7 @@ static float r0 = 0.0F;
 static float r1 = 0.0F;
 static float r2 = 0.0F;
 static float r3 = 0.0F;
+static float testplusajour;
 //static float r4 = 0.0F;
 static const float blanc[] = { 1.0F,1.0F,1.0F,1.0F };
 static const float jaune[] = { 1.0F,1.0F,0.0F,1.0F };
