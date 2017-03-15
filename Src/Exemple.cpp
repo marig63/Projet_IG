@@ -6,18 +6,20 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include "Projet\FormeGeometrique.h"
+#include "Projet\X_wing.h"
 
 /* Variables et constantes globales             */
 /* pour les angles et les couleurs utilises     */
 
 static float r0 = 0.0F;
-
-
 static float r1 = 0.0F;
+
 static float r2 = 0.0F;
 static float r3 = 0.0F;
 static float testplusajour;
@@ -41,8 +43,8 @@ void init(void) {
   glLightfv(GL_LIGHT2,GL_DIFFUSE,bleu);
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
-  glEnable(GL_LIGHT1);
-  glEnable(GL_LIGHT2);
+  //glEnable(GL_LIGHT1);
+  //glEnable(GL_LIGHT2);
   glDepthFunc(GL_LESS);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_NORMALIZE);
@@ -50,20 +52,14 @@ void init(void) {
 }
 
 /* Scene dessinee                               */
-
 void scene(void) {
   glPushMatrix();
-  glRotatef(r0,0.0F,0.0F,1.0F);
-  glRotatef(r1,0.0F,1.0F,0.0F);
-  glutSolidTorus(0.7,10.0,18,72);
-  glRotatef(r2,1.0F,0.0F,0.0F);
-  glutSolidTorus(0.7,8.6F,18,72);
-  glRotatef(90.0F,0.0F,0.0F,1.0F);
-  glRotatef(r3,1.0F,0.0F,0.0F);
-  glutSolidTorus(0.7,7.2F,18,72);
-  glRotatef(90.0F,0.0F,0.0F,1.0F);
-  //glRotatef(r4,1.0F,0.0F,0.0F);
-  glutSolidTorus(0.7,5.8F,18,72);
+  glRotatef(90.0F,0.0F,1.0F,0.0F);
+  glRotatef(r0,0.0F,1.0F,0.0F);
+  glRotatef(r1, 1.0F, 0.0F, 0.0F);
+ 
+  X_wing wing = X_wing();
+  
   glPopMatrix();
 }
 
@@ -74,7 +70,7 @@ void display(void) {
   printf("D\n");
   glClearColor(0.5F,0.5F,0.5F,0.5F);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  const GLfloat light0_position[] = { 0.0,0.0,0.0,1.0 };
+  const GLfloat light0_position[] = { 100.0,100.0,100.0,1.0 };
   const GLfloat light1_position[] = { -1.0,1.0,1.0,0.0 };
   const GLfloat light2_position[] = { 1.0,-1.0,1.0,0.0 };
   glLightfv(GL_LIGHT0,GL_POSITION,light0_position);
@@ -95,8 +91,8 @@ void display(void) {
 
 void idle(void) {
   printf("I\n");
-  r0 += 0.3355F;
-  r1 += 0.6117F;
+  //r0 += 0.3355F;
+  //r1 += 0.6117F;
   r2 += 0.4174F;
   r3 += 0.5715F;
   //r4 += 0.6433F;
@@ -123,14 +119,30 @@ void reshape(int x,int y) {
 void keyboard(unsigned char key,int x,int y) {
   printf("K\n");
   switch (key) {
-    case 0x0D :
-      { static int anim = 1;
-        anim = !anim;
-        glutIdleFunc(( anim ) ? idle : NULL); }
-      break;
-    case 0x1B :
-      exit(0);
-      break; }
+  case 0x0D:
+  { static int anim = 1;
+  anim = !anim;
+  glutIdleFunc((anim) ? idle : NULL); }
+  break;
+  case 0x1B:
+	  exit(0);
+
+  case 'd':
+	  r0 = r0+10;
+	  break;
+
+  case 'q':
+	  r0 =r0-10;
+	  break;
+
+  case 's':
+	  r1=r1+10;
+	  break;
+
+  case 'z':
+	  r1=r1-10;
+	  break;
+  }
 }
 
 /* Fonction principale                          */
@@ -140,7 +152,7 @@ int main(int argc,char **argv) {
   glutInitDisplayMode(GLUT_RGBA|GLUT_DEPTH|GLUT_DOUBLE);
   glutInitWindowSize(300,300);
   glutInitWindowPosition(50,50);
-  glutCreateWindow("Des anneaux en rotation");
+  glutCreateWindow("X-wing");
   init();
   glutKeyboardFunc(keyboard);
   glutReshapeFunc(reshape);
