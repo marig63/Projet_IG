@@ -101,14 +101,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\Exemple.cpp" />
     <ClCompile Include="..\..\Src\FormeGeometrique.cpp" />
+    <ClCompile Include="..\..\Src\Tourelle.cpp" />
     <ClCompile Include="..\..\Src\X_wing.cpp" />
-    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\Projet\FormeGeometrique.h" />
-    <ClInclude Include="..\..\Include\Projet\Test.h" />
+    <ClInclude Include="..\..\Include\Projet\Tourelle.h" />
     <ClInclude Include="..\..\Include\Projet\X_wing.h" />
-    <ClInclude Include="Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

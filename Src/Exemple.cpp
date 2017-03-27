@@ -13,6 +13,7 @@
 #include <GL/glu.h>
 #include "Projet\FormeGeometrique.h"
 #include "Projet\X_wing.h"
+#include "Projet\Tourelle.h"
 
 /* Variables et constantes globales             */
 /* pour les angles et les couleurs utilises     */
@@ -23,7 +24,7 @@ static float r1 = 0.0F;
 static float r2 = 0.0F;
 static float r3 = 0.0F;
 static float testplusajour;
-//static float r4 = 0.0F;
+static float r4 = 0.0F;
 static const float blanc[] = { 1.0F,1.0F,1.0F,1.0F };
 static const float jaune[] = { 1.0F,1.0F,0.0F,1.0F };
 static const float rouge[] = { 1.0F,0.0F,0.0F,1.0F };
@@ -58,7 +59,8 @@ void scene(void) {
   glRotatef(r0,0.0F,1.0F,0.0F);
   glRotatef(r1, 1.0F, 0.0F, 0.0F);
  
-  X_wing wing = X_wing();
+  //X_wing wing = X_wing();
+  Tourelle t1 = Tourelle(5.0,r4);
   
   glPopMatrix();
 }
@@ -95,7 +97,7 @@ void idle(void) {
   //r1 += 0.6117F;
   r2 += 0.4174F;
   r3 += 0.5715F;
-  //r4 += 0.6433F;
+  r4 += 0.3333f;
   glutPostRedisplay();
 }
 
