@@ -1,6 +1,7 @@
 #include "Projet/Tourelle.h"
 #include "Projet\FormeGeometrique.h"
 #include <GL/glut.h>
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <math.h>
@@ -15,8 +16,7 @@ Tourelle::Tourelle(double taille,double rotTete)
 {
 	size = taille;
 	rot = rotTete;
-	corps();
-	canon();
+	dessineTourelle();
 }
 
 
@@ -24,13 +24,17 @@ Tourelle::~Tourelle()
 {
 }
 
-void Tourelle::corps() {
+void Tourelle::dessineTourelle() {
+
 	glPushMatrix();
 
 	
 	glPushMatrix();
 	glScalef(1.3, 2.0, 1.3);
-	glutSolidCube(1.0*size);
+
+	glScalef(size, size, size);
+	FormeGeometrique::mySolidCube();
+	//glutSolidCube(1.0*size);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -53,16 +57,13 @@ void Tourelle::corps() {
 	FormeGeometrique::mySolidCylindre(size, size / 8, 10);
 	glPopMatrix();
 
-	
+	glScalef(size,size, size);
 	glScalef(1.3, 0.8, 1.3);
-	glutSolidCube(1.0*size);
+	FormeGeometrique::mySolidCube();
+	//glutSolidCube(1.0*size);
 	glPopMatrix();
 	
 
 
 	glPopMatrix();
-}
-
-void Tourelle::canon() {
-
 }

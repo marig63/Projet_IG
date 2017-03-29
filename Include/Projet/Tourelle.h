@@ -11,7 +11,6 @@ public:
 	Tourelle(double taille,double rotTete);
 	~Tourelle();
 
-	void corps();
-	void canon();
+	void dessineTourelle();
 };
 

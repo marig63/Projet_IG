@@ -14,6 +14,7 @@
 #include "Projet\FormeGeometrique.h"
 #include "Projet\X_wing.h"
 #include "Projet\Tourelle.h"
+#include "PNG\ChargePngFile.h"
 
 /* Variables et constantes globales             */
 /* pour les angles et les couleurs utilises     */
@@ -50,6 +51,10 @@ void init(void) {
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_NORMALIZE);
   glEnable(GL_AUTO_NORMAL);
+
+
+  
+
 }
 
 /* Scene dessinee                               */
@@ -60,6 +65,23 @@ void scene(void) {
   glRotatef(r1, 1.0F, 0.0F, 0.0F);
  
   //X_wing wing = X_wing();
+
+  /*int rx;
+  int ry;
+  unsigned char *img = chargeImagePng("texture.png", &rx, &ry);
+  if (img) {
+	  glTexImage2D(GL_TEXTURE_2D, 0, 3, rx, ry, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
+	  free(img);
+  }
+  printf("%d %d\n", rx, ry);
+  
+  glEnable(GL_TEXTURE_2D);
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); */
   Tourelle t1 = Tourelle(5.0,r4);
   
   glPopMatrix();
