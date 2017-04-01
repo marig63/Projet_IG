@@ -27,6 +27,9 @@ static float r3 = 0.0F;
 static float testplusajour;
 static float r4 = 0.0F;
 static const float blanc[] = { 1.0F,1.0F,1.0F,1.0F };
+
+static const float noir[] = { 0.0F,0.0F,0.0F,0.0F };
+static const float gris[] = { 0.2F,0.2F,0.2F,0.0F };
 static const float jaune[] = { 1.0F,1.0F,0.0F,1.0F };
 static const float rouge[] = { 1.0F,0.0F,0.0F,1.0F };
 static const float vert[] = { 0.0F,1.0F,0.0F,1.0F };
@@ -36,13 +39,24 @@ static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
 /* OpenGL ne changeant pas au cours de la vie   */
 /* du programme                                 */
 
+unsigned char *img;
+int rx, ry;
+
 void init(void) {
   const GLfloat shininess[] = { 50.0 };
   glMaterialfv(GL_FRONT,GL_SPECULAR,blanc);
   glMaterialfv(GL_FRONT,GL_SHININESS,shininess);
-  glLightfv(GL_LIGHT0,GL_DIFFUSE,rouge);
-  glLightfv(GL_LIGHT1,GL_DIFFUSE,jaune);
-  glLightfv(GL_LIGHT2,GL_DIFFUSE,bleu);
+  GLfloat no_mat[] = { 0.0F,0.0F,0.0F,1.0F };
+  GLfloat mat_diffuse[] = { 0.1F,0.5F,0.8F,1.0F };
+  GLfloat no_shininess[] = { 0.0F };
+  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, no_mat);
+  //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, blanc);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, no_mat);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, no_shininess);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, no_mat);
+  glLightfv(GL_LIGHT0,GL_DIFFUSE,blanc);
+  //glLightfv(GL_LIGHT1,GL_DIFFUSE,blanc);
+  //glLightfv(GL_LIGHT2,GL_DIFFUSE,bleu);
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
   //glEnable(GL_LIGHT1);
@@ -52,7 +66,17 @@ void init(void) {
   glEnable(GL_NORMALIZE);
   glEnable(GL_AUTO_NORMAL);
 
+  /*
+  GLfloat pos[] = { 0.0F,0.0F,-1.0F,0.0F };
+  GLfloat shininess[] = { 50.0F };
+  glEnable(GL_LIGHT0);
+  glEnable(GL_LIGHTING);
+  glLightfv(GL_LIGHT0, GL_AMBIENT, gris);
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, blanc);
+  glMaterialfv(GL_FRONT, GL_SPECULAR, blanc);
+  glMaterialfv(GL_FRONT, GL_SHININESS, shininess);*/
 
+  
   
 
 }
@@ -66,22 +90,36 @@ void scene(void) {
  
   //X_wing wing = X_wing();
 
-  /*int rx;
-  int ry;
-  unsigned char *img = chargeImagePng("texture.png", &rx, &ry);
+  
+
   if (img) {
 	  glTexImage2D(GL_TEXTURE_2D, 0, 3, rx, ry, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
-	  free(img);
+	  //free(img);
   }
   printf("%d %d\n", rx, ry);
-  
   glEnable(GL_TEXTURE_2D);
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); */
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+
+  /*glPushMatrix();
+  glBegin(GL_QUADS);
+  glNormal3f(0.0f, 0.0f, 1.0f);
+  glTexCoord2f(0.0f, 0.0f);
+  glVertex2f(-3, -3);
+  glTexCoord2f(1.0f, 0.0f);
+  glVertex2f(3, -3);
+  glTexCoord2f(1.0f, 1.0f);
+  glVertex2f(3, 3);
+  glTexCoord2f(0.0f, 1.0f);
+  glVertex2f(-3, 3);
+  glEnd();
+  glPopMatrix();*/
+
   Tourelle t1 = Tourelle(5.0,r4);
   
   glPopMatrix();
@@ -177,11 +215,16 @@ int main(int argc,char **argv) {
   glutInitWindowSize(300,300);
   glutInitWindowPosition(50,50);
   glutCreateWindow("X-wing");
+
+  img = chargeImagePng("gris.png", &rx, &ry);
+
   init();
   glutKeyboardFunc(keyboard);
   glutReshapeFunc(reshape);
   glutIdleFunc(idle);
   glutDisplayFunc(display);
   glutMainLoop();
+
+  free(img);
   return(0);
 }

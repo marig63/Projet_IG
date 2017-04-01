@@ -130,9 +130,17 @@ void FormeGeometrique::mySolidCube() {
 	glBegin(GL_QUADS);
 	// right
 	glNormal3f(1.0f, 0.0f, 0.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0.5f, -0.5f, 0.5f);
+
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.5f, -0.5f, -0.5f);
+
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.5f, 0.5f, -0.5f);
+
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0.5f, 0.5f, 0.5f);
 
 	glEnd();
@@ -140,9 +148,17 @@ void FormeGeometrique::mySolidCube() {
 	glBegin(GL_QUADS);
 	// left
 	glNormal3f(-1.0f, 0.0f, 0.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.5f, -0.5f, 0.5f);
+
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.5f, 0.5f, 0.5f);
+
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.5f, 0.5f, -0.5f);
+
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.5f, -0.5f, -0.5f);
 
 	glEnd();
@@ -150,9 +166,17 @@ void FormeGeometrique::mySolidCube() {
 	glBegin(GL_QUADS);
 	// bottom
 	glNormal3f(0.0f, -1.0f, 0.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.5f, -0.5f, 0.5f);
+
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.5f, -0.5f, 0.5f);
+
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.5f, -0.5f, -0.5f);
+
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.5f, -0.5f, -0.5f);
 
 	glEnd();
@@ -160,9 +184,17 @@ void FormeGeometrique::mySolidCube() {
 	glBegin(GL_QUADS);
 	// back
 	glNormal3f(0.0f, 0.0f, -1.0f);
+
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0.5f, 0.5f, -0.5f);
+
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.5f, -0.5f, -0.5f);
+
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.5f, -0.5f, -0.5f);
+
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.5f, 0.5f, -0.5f);
 
 	glEnd();
