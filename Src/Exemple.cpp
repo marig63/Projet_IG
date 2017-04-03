@@ -14,6 +14,8 @@
 #include "Projet\FormeGeometrique.h"
 #include "Projet\X_wing.h"
 #include "Projet\Tourelle.h"
+#include "Projet\EtoileNoir.h"
+#include "Projet\Tir.h"
 #include "PNG\ChargePngFile.h"
 
 /* Variables et constantes globales             */
@@ -26,21 +28,26 @@ static float r2 = 0.0F;
 static float r3 = 0.0F;
 static float testplusajour;
 static float r4 = 0.0F;
+static float r5 = 0.0F;
 static const float blanc[] = { 1.0F,1.0F,1.0F,1.0F };
 
-static const float noir[] = { 0.0F,0.0F,0.0F,0.0F };
-static const float gris[] = { 0.2F,0.2F,0.2F,0.0F };
+static const float noir[] = { 0.0F,0.0F,0.0F,1.0F };
+static const float gris[] = { 0.2F,0.2F,0.2F,1.0F };
 static const float jaune[] = { 1.0F,1.0F,0.0F,1.0F };
 static const float rouge[] = { 1.0F,0.0F,0.0F,1.0F };
 static const float vert[] = { 0.0F,1.0F,0.0F,1.0F };
 static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
 
+Tourelle t1 = Tourelle();
+
+unsigned char *img;
+int rx, ry;
+
 /* Fonction d'initialisation des parametres     */
 /* OpenGL ne changeant pas au cours de la vie   */
 /* du programme                                 */
 
-unsigned char *img;
-int rx, ry;
+
 
 void init(void) {
   const GLfloat shininess[] = { 50.0 };
@@ -89,7 +96,9 @@ void scene(void) {
   glRotatef(r1, 1.0F, 0.0F, 0.0F);
  
   //X_wing wing = X_wing();
+  //EtoileNoir et = EtoileNoir();
 
+  
   
 
   if (img) {
@@ -106,23 +115,15 @@ void scene(void) {
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 
-  /*glPushMatrix();
-  glBegin(GL_QUADS);
-  glNormal3f(0.0f, 0.0f, 1.0f);
-  glTexCoord2f(0.0f, 0.0f);
-  glVertex2f(-3, -3);
-  glTexCoord2f(1.0f, 0.0f);
-  glVertex2f(3, -3);
-  glTexCoord2f(1.0f, 1.0f);
-  glVertex2f(3, 3);
-  glTexCoord2f(0.0f, 1.0f);
-  glVertex2f(-3, 3);
-  glEnd();
-  glPopMatrix();*/
-
-  Tourelle t1 = Tourelle(5.0,r4);
+  
+  glScalef(0.2 , 0.2, 0.2);
+  
+  t1.dessineTourelle(5.0, 0.0 ,r5);
+  //glRotatef(90.0, 0.0f, 0.0f, 1.0f);
+  //Tir t = Tir(r5, 1.0f, 1.0f, 0.0f);
   
   glPopMatrix();
+
 }
 
 /* Fonction executee lors d'un rafraichissement */
@@ -158,6 +159,7 @@ void idle(void) {
   r2 += 0.4174F;
   r3 += 0.5715F;
   r4 += 0.3333f;
+  r5 += 1.5f;
   glutPostRedisplay();
 }
 
@@ -169,7 +171,7 @@ void reshape(int x,int y) {
   glViewport(0,0,x,y); 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(80.0F,(float) x/y,1.0,40.0);
+  gluPerspective(80.0F,(float) x/y,1.0,80.0);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   gluLookAt(0.0,0.0,20.0,0.0,0.0,0.0,0.0,1.0,0.0);
@@ -204,6 +206,10 @@ void keyboard(unsigned char key,int x,int y) {
   case 'z':
 	  r1=r1-10;
 	  break;
+  case 't':
+	  r5 = 0.0f;
+	  t1.tir= true;
+	  break;
   }
 }
 
@@ -212,11 +218,11 @@ void keyboard(unsigned char key,int x,int y) {
 int main(int argc,char **argv) {
   glutInit(&argc,argv);
   glutInitDisplayMode(GLUT_RGBA|GLUT_DEPTH|GLUT_DOUBLE);
-  glutInitWindowSize(300,300);
+  glutInitWindowSize(800,800);
   glutInitWindowPosition(50,50);
   glutCreateWindow("X-wing");
 
-  img = chargeImagePng("gris.png", &rx, &ry);
+  img = chargeImagePng("testure.png", &rx, &ry);
 
   init();
   glutKeyboardFunc(keyboard);

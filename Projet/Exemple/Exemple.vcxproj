@@ -131,8 +131,10 @@
     <ClCompile Include="..\..\Include\PNG\Png\trees.c" />
     <ClCompile Include="..\..\Include\PNG\Png\uncompr.c" />
     <ClCompile Include="..\..\Include\PNG\Png\zutil.c" />
+    <ClCompile Include="..\..\Src\EtoileNoir.cpp" />
     <ClCompile Include="..\..\Src\Exemple.cpp" />
     <ClCompile Include="..\..\Src\FormeGeometrique.cpp" />
+    <ClCompile Include="..\..\Src\Tir.cpp" />
     <ClCompile Include="..\..\Src\Tourelle.cpp" />
     <ClCompile Include="..\..\Src\X_wing.cpp" />
   </ItemGroup>
@@ -156,7 +158,9 @@
     <ClInclude Include="..\..\Include\PNG\Png\zconf.in.h" />
     <ClInclude Include="..\..\Include\PNG\Png\zlib.h" />
     <ClInclude Include="..\..\Include\PNG\Png\zutil.h" />
+    <ClInclude Include="..\..\Include\Projet\EtoileNoir.h" />
     <ClInclude Include="..\..\Include\Projet\FormeGeometrique.h" />
+    <ClInclude Include="..\..\Include\Projet\Tir.h" />
     <ClInclude Include="..\..\Include\Projet\Tourelle.h" />
     <ClInclude Include="..\..\Include\Projet\X_wing.h" />
   </ItemGroup>

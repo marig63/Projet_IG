@@ -1,4 +1,5 @@
 #include "Projet/Tourelle.h"
+#include "Projet\Tir.h"
 #include "Projet\FormeGeometrique.h"
 #include <GL/glut.h>
 
@@ -14,9 +15,7 @@ Tourelle::Tourelle()
 
 Tourelle::Tourelle(double taille,double rotTete)
 {
-	size = taille;
-	rot = rotTete;
-	dessineTourelle();
+	//dessineTourelle();
 }
 
 
@@ -24,7 +23,9 @@ Tourelle::~Tourelle()
 {
 }
 
-void Tourelle::dessineTourelle() {
+void Tourelle::dessineTourelle(double taille, double rotTete,float avanceeTir) {
+	size = taille;
+	rot = rotTete;
 
 	glPushMatrix();
 
@@ -47,6 +48,13 @@ void Tourelle::dessineTourelle() {
 	FormeGeometrique::mySolidCylindre(1.5*size, size / 5, 16);
 	glTranslatef(0.0f, 0.4f*size, 0.0f);
 	FormeGeometrique::mySolidCylindre(size, size / 8, 10);
+	//glRotatef(40.0, 0.0f, 0.0f, 1.0f);
+	t1 = Tir(avanceeTir, 7,1);
+
+	if (tir) {
+		tirer();
+	}
+
 	glPopMatrix();
 
 	glPushMatrix();
@@ -55,6 +63,12 @@ void Tourelle::dessineTourelle() {
 	FormeGeometrique::mySolidCylindre(1.5*size, size / 5, 16);
 	glTranslatef(0.0f, 0.4f*size, 0.0f);
 	FormeGeometrique::mySolidCylindre(size, size / 8, 10);
+	//glRotatef(40.0, 0.0f, 0.0f, 1.0f);
+	t2 = Tir(avanceeTir,7,1);
+	if (tir) {
+		tirer();
+	}
+
 	glPopMatrix();
 
 	glScalef(size,size, size);
@@ -66,4 +80,12 @@ void Tourelle::dessineTourelle() {
 
 
 	glPopMatrix();
+
+	
+}
+
+void Tourelle::tirer() {
+	t1.dessineTir();
+	t2.dessineTir();
+
 }
