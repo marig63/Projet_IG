@@ -35,7 +35,7 @@ void Trench::modelise(float p)
 			Ensemble1(pos - i * 20);
 		}
 		//on construit le prochain morceau
-		if (pos - posCam >= 50) {
+		if (pos - posCam >= 20) {
 			for (int i = 0; i < 8; i++) {
 
 				Ensemble1((pos - 160) - i * 20);
