@@ -2,7 +2,7 @@
 class X_wing
 {
 public:
-	X_wing();
+	X_wing(double pos);
 	~X_wing();
 
 	void base();

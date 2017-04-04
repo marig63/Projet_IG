@@ -5,9 +5,11 @@
 #include <GL/glu.h>
 #include <math.h>
 
-X_wing::X_wing()
-{
+X_wing::X_wing(double pos){
+	glPushMatrix();
+	glTranslatef(0.0F,0.0F,-pos);
 	base();
+	glPopMatrix();
 }
 
 

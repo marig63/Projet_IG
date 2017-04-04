@@ -65,7 +65,7 @@ void init(void) {
   glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, no_shininess);
   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, no_mat);
   glLightfv(GL_LIGHT0,GL_DIFFUSE,blanc);
-  //glLightfv(GL_LIGHT1,GL_DIFFUSE,blanc);
+  glLightfv(GL_LIGHT1,GL_DIFFUSE,bleu);
   //glLightfv(GL_LIGHT2,GL_DIFFUSE,bleu);
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
@@ -86,8 +86,6 @@ void init(void) {
   glMaterialfv(GL_FRONT, GL_SPECULAR, blanc);
   glMaterialfv(GL_FRONT, GL_SHININESS, shininess);*/
 
-  
-  
 
 }
 
@@ -98,11 +96,21 @@ void scene(void) {
   glRotatef(r0,0.0F,1.0F,0.0F);
   glRotatef(r1, 1.0F, 0.0F, 0.0F);
  
-  //X_wing wing = X_wing();
+  //Positionnement du x-wing
+  glPushMatrix();
+
+  glEnable(GL_LIGHT1);
+  glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+  glTranslatef(0.0F,10.0F,0.0F);
+  X_wing wing = X_wing(cam);
+  glDisable(GL_LIGHT1);
+
+  glPopMatrix();
+
+
   //EtoileNoir et = EtoileNoir();
   
-  tr.modelise(30);
-  
+  tr.modelise(20);
   
   /*
   if (img) {
