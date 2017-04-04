@@ -136,6 +136,7 @@
     <ClCompile Include="..\..\Src\FormeGeometrique.cpp" />
     <ClCompile Include="..\..\Src\Tir.cpp" />
     <ClCompile Include="..\..\Src\Tourelle.cpp" />
+    <ClCompile Include="..\..\Src\Trench.cpp" />
     <ClCompile Include="..\..\Src\X_wing.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +163,7 @@
     <ClInclude Include="..\..\Include\Projet\FormeGeometrique.h" />
     <ClInclude Include="..\..\Include\Projet\Tir.h" />
     <ClInclude Include="..\..\Include\Projet\Tourelle.h" />
+    <ClInclude Include="..\..\Include\Projet\Trench.h" />
     <ClInclude Include="..\..\Include\Projet\X_wing.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

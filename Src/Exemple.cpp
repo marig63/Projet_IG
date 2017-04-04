@@ -16,6 +16,7 @@
 #include "Projet\Tourelle.h"
 #include "Projet\EtoileNoir.h"
 #include "Projet\Tir.h"
+#include "Projet\Trench.h"
 #include "PNG\ChargePngFile.h"
 
 /* Variables et constantes globales             */
@@ -38,6 +39,8 @@ static const float rouge[] = { 1.0F,0.0F,0.0F,1.0F };
 static const float vert[] = { 0.0F,1.0F,0.0F,1.0F };
 static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
 
+static float cam = 20.0f;
+Trench tr = Trench(cam + 10, cam);
 Tourelle t1 = Tourelle();
 
 unsigned char *img;
@@ -91,16 +94,17 @@ void init(void) {
 /* Scene dessinee                               */
 void scene(void) {
   glPushMatrix();
-  glRotatef(90.0F,0.0F,1.0F,0.0F);
+  //glRotatef(90.0F,0.0F,1.0F,0.0F);
   glRotatef(r0,0.0F,1.0F,0.0F);
   glRotatef(r1, 1.0F, 0.0F, 0.0F);
  
   //X_wing wing = X_wing();
   //EtoileNoir et = EtoileNoir();
-
+  
+  tr.modelise(30);
   
   
-
+  /*
   if (img) {
 	  glTexImage2D(GL_TEXTURE_2D, 0, 3, rx, ry, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
 	  //free(img);
@@ -122,6 +126,8 @@ void scene(void) {
   //glRotatef(90.0, 0.0f, 0.0f, 1.0f);
   //Tir t = Tir(r5, 1.0f, 1.0f, 0.0f);
   
+  */
+
   glPopMatrix();
 
 }
@@ -140,6 +146,7 @@ void display(void) {
   glLightfv(GL_LIGHT1,GL_POSITION,light1_position);
   glLightfv(GL_LIGHT2,GL_POSITION,light2_position);
   glPushMatrix();
+  gluLookAt(0.0, 20.0, cam + 20, 0.0, 0.0, cam - 20, 0.0, 1.0, 0.0);
   scene();
   glPopMatrix();
   glFlush();
@@ -160,6 +167,8 @@ void idle(void) {
   r3 += 0.5715F;
   r4 += 0.3333f;
   r5 += 1.5f;
+  cam = cam - 2;
+  tr.addPos(2);
   glutPostRedisplay();
 }
 
@@ -171,10 +180,10 @@ void reshape(int x,int y) {
   glViewport(0,0,x,y); 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(80.0F,(float) x/y,1.0,80.0);
+  gluPerspective(80.0F,(float) x/y,1.0,400.0);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  gluLookAt(0.0,0.0,20.0,0.0,0.0,0.0,0.0,1.0,0.0);
+  //gluLookAt(0.0,0.0,20.0,0.0,0.0,0.0,0.0,1.0,0.0);
 }
 
 /* Fonction executee lors de l'appui            */
@@ -192,19 +201,19 @@ void keyboard(unsigned char key,int x,int y) {
 	  exit(0);
 
   case 'd':
-	  r0 = r0+10;
+	  r0 = r0+0.5;
 	  break;
 
   case 'q':
-	  r0 =r0-10;
+	  r0 =r0-0.5;
 	  break;
 
   case 's':
-	  r1=r1+10;
+	  r1=r1+0.5;
 	  break;
 
   case 'z':
-	  r1=r1-10;
+	  r1=r1-0.5;
 	  break;
   case 't':
 	  r5 = 0.0f;
