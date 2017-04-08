@@ -11,7 +11,7 @@ private:
 	
 
 public:
-	bool tir = false;
+	bool tir = true;
 
 	Tourelle();
 	Tourelle(double taille,double rotTete);

@@ -1,10 +1,8 @@
-﻿  Exemple.cpp
-  X_wing.cpp
+﻿  Trench.cpp
   Génération de code en cours
-  15 of 221 functions ( 6.8%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
+  1 of 227 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
     1 functions had inline decision re-evaluated but remain unchanged
   Fin de la génération du code
-  Exemple.vcxproj -> C:\Users\asus\Documents\cours M1\IG\projet\trunk\Projet\Exemple\..\..\Temp\Release\Exemple\Exemple.exe
-  Exemple.vcxproj -> ..\..\Temp\Release\Exemple\Exemple.pdb (Full PDB)
+  Exemple.vcxproj -> C:\Users\guillaume\Desktop\IG3\trunk\Projet\Exemple\..\..\Temp\Release\Exemple\Exemple.exe
           1 fichier(s) copié(s).

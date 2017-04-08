@@ -1,5 +1,6 @@
 #include "Projet\Trench.h"
 #include "Projet\FormeGeometrique.h"
+#include "Projet\Tourelle.h"
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -33,12 +34,18 @@ void Trench::modelise(float p)
 		for (int i = 0; i < 8; i++) {
 
 			Ensemble1(pos - i * 20);
+			tourelle(i);
 		}
+
+		
+
+
 		//on construit le prochain morceau
 		if (pos - posCam >= 20) {
-			for (int i = 0; i < 8; i++) {
+			for (int i = 0; i <8; i++) {
 
 				Ensemble1((pos - 160) - i * 20);
+				tourelle(i);
 			}
 		}
 	}
@@ -46,6 +53,20 @@ void Trench::modelise(float p)
 		pos = posCam + 10;
 	}
 	
+}
+
+void Trench ::tourelle(int ind) {
+	if (ind == 7) {
+		// ajout d'une tourelle
+		glPushMatrix();
+		glTranslatef(-10.0f, 5.0f, pos - ind * 35);
+		glRotatef(90.0, 0.0f, 1.0f, 0.0f);
+		Tourelle t1 = Tourelle();
+		t1.dessineTourelle(5.0, 3.0, r);
+		glPopMatrix();
+		//
+	}
+
 }
 
 void Trench::Ensemble1(float position)

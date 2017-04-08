@@ -43,31 +43,39 @@ void Tourelle::dessineTourelle(double taille, double rotTete,float avanceeTir) {
 	glRotatef(rot, 0.0f, 1.0f, 0.0f);
 
 	glPushMatrix();
-	glRotatef(80.0, 0.0f, 0.0f, 1.0f);
+	glRotatef(90.0, 0.0f, 0.0f, 1.0f);
 	glTranslatef(0.0f, 0.8f*size, 0.4f*size);
 	FormeGeometrique::mySolidCylindre(1.5*size, size / 5, 16);
 	glTranslatef(0.0f, 0.4f*size, 0.0f);
 	FormeGeometrique::mySolidCylindre(size, size / 8, 10);
 	//glRotatef(40.0, 0.0f, 0.0f, 1.0f);
+	
 	t1 = Tir(avanceeTir, 7,1);
 
 	if (tir) {
+		glEnable(GL_LIGHT2);
 		tirer();
+		glDisable(GL_LIGHT2);
 	}
+	
 
 	glPopMatrix();
 
 	glPushMatrix();
-	glRotatef(80.0, 0.0f, 0.0f, 1.0f);
+	glRotatef(90.0, 0.0f, 0.0f, 1.0f);
 	glTranslatef(0.0f, 0.8f*size, -0.3f*size);
 	FormeGeometrique::mySolidCylindre(1.5*size, size / 5, 16);
 	glTranslatef(0.0f, 0.4f*size, 0.0f);
 	FormeGeometrique::mySolidCylindre(size, size / 8, 10);
 	//glRotatef(40.0, 0.0f, 0.0f, 1.0f);
+	
 	t2 = Tir(avanceeTir,7,1);
 	if (tir) {
+		glEnable(GL_LIGHT2);
 		tirer();
+		glDisable(GL_LIGHT2);
 	}
+	
 
 	glPopMatrix();
 

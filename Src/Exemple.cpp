@@ -66,6 +66,7 @@ void init(void) {
   glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, no_mat);
   glLightfv(GL_LIGHT0,GL_DIFFUSE,blanc);
   glLightfv(GL_LIGHT1,GL_DIFFUSE,bleu);
+  glLightfv(GL_LIGHT2, GL_DIFFUSE,rouge);
   //glLightfv(GL_LIGHT2,GL_DIFFUSE,bleu);
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
@@ -175,6 +176,8 @@ void idle(void) {
   r3 += 0.5715F;
   r4 += 0.3333f;
   r5 += 1.5f;
+  if (tr.r > 300) { tr.r = 0.0f; }
+  else { tr.r += 8.0f; }
   cam = cam - 2;
   tr.addPos(2);
   glutPostRedisplay();
