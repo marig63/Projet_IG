@@ -1,14 +1,23 @@
 #pragma once
+#include "Tir.h"
+
 class X_wing
 {
 public:
-	X_wing(double pos);
+	float r;
+	Tir t1;
+	Tir t2;
+	bool tir = true;
+
+	X_wing();
 	~X_wing();
 
+	void modelise(double pos);
 	void base();
 	void reacteur();
 	void aile();
 	void canon();
 	void cockpit();
+	void tirer();
 };
 

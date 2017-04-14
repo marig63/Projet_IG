@@ -1,15 +1,20 @@
 #include "Projet\X_wing.h"
 #include "Projet\FormeGeometrique.h"
+#include <stdio.h>
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <math.h>
 
-X_wing::X_wing(double pos){
+void X_wing::modelise(double pos){
 	glPushMatrix();
 	glTranslatef(0.0F,0.0F,-pos);
 	base();
 	glPopMatrix();
+}
+
+X_wing::X_wing() {
+	r = 0.0f;
 }
 
 
@@ -79,6 +84,19 @@ void X_wing::canon(){
 	FormeGeometrique::mySolidCylindre(4.0F, 0.3F, 36);
 	glTranslatef(0.0F, 4.0F, 0.0F);
 	FormeGeometrique::mySolidCylindre(4.0F, 0.2F, 36);
+	// tir
+
+	printf("%f\n", r);
+
+	t1 = Tir(r, 7, 1);
+
+	if (tir) {
+		glEnable(GL_LIGHT2);
+		tirer();
+		glDisable(GL_LIGHT2);
+	}
+
+	//
 
 	glTranslatef(0.0F, 2.4F, 0.0F);
 
@@ -88,7 +106,22 @@ void X_wing::canon(){
 	glPopMatrix();
 
 	FormeGeometrique::mySolidCylindre(2.0F, 0.1F, 36);
+	// tir
+	t1 = Tir(r, 7, 1);
+
+	if (tir) {
+		glEnable(GL_LIGHT2);
+		tirer();
+		glDisable(GL_LIGHT2);
+	}
+
+	//
 	glPopMatrix();
+}
+
+void X_wing::tirer() {
+	t1.dessineTir();
+	t2.dessineTir();
 }
 
 void X_wing::cockpit() {

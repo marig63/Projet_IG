@@ -95,5 +95,4 @@ void Tourelle::dessineTourelle(double taille, double rotTete,float avanceeTir) {
 void Tourelle::tirer() {
 	t1.dessineTir();
 	t2.dessineTir();
-
 }

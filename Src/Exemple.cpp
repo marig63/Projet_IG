@@ -42,6 +42,7 @@ static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
 static float cam = 20.0f;
 Trench tr = Trench(cam + 10, cam);
 Tourelle t1 = Tourelle();
+X_wing wing = X_wing();
 
 unsigned char *img;
 int rx, ry;
@@ -103,7 +104,7 @@ void scene(void) {
   glEnable(GL_LIGHT1);
   glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
   glTranslatef(0.0F,10.0F,0.0F);
-  X_wing wing = X_wing(cam);
+  wing.modelise(cam);
   glDisable(GL_LIGHT1);
 
   glPopMatrix();
@@ -145,7 +146,7 @@ void scene(void) {
 /* de la fenetre de dessin                      */
 
 void display(void) {
-  printf("D\n");
+  //printf("D\n");
   glClearColor(0.5F,0.5F,0.5F,0.5F);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   const GLfloat light0_position[] = { 100.0,100.0,100.0,1.0 };
@@ -169,15 +170,19 @@ void display(void) {
 /* n'est en file d'attente                      */
 
 void idle(void) {
-  printf("I\n");
+  //printf("I\n");
   //r0 += 0.3355F;
   //r1 += 0.6117F;
   r2 += 0.4174F;
   r3 += 0.5715F;
   r4 += 0.3333f;
-  r5 += 1.5f;
+  //r5 += 1.5f;
   if (tr.r > 300) { tr.r = 0.0f; }
   else { tr.r += 8.0f; }
+
+  if (r5 > 300) { r5 = 0.0f; wing.r = r5; }
+  else { r5 += 8.0f; wing.r = r5; }
+
   cam = cam - 2;
   tr.addPos(2);
   glutPostRedisplay();
@@ -187,7 +192,7 @@ void idle(void) {
 /* de la taille de la fenetre OpenGL            */
 
 void reshape(int x,int y) {
-  printf("R\n");
+  //printf("R\n");
   glViewport(0,0,x,y); 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
