@@ -12,7 +12,7 @@ public:
 	X_wing();
 	~X_wing();
 
-	void modelise(double pos);
+	void modelise(double posX,double posY,double posZ);
 	void base();
 	void reacteur();
 	void aile();

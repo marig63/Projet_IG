@@ -42,6 +42,11 @@ static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
 static float diametreTorus = 10.0F;
 static int destructionOn = 0;
 static float deplaSphereExplo = 0.0F;
+static int changementCam = 0;
+static double posXwingX = 0.0;
+static double posXwingY = 0.0;
+static double posYMax = 4.0;
+static double posXMax = 10.0;
 
 static float cam = 20.0f;
 Trench tr = Trench(cam + 10, cam);
@@ -109,21 +114,21 @@ void scene(void) {
   glEnable(GL_LIGHT1);
   glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
   glTranslatef(0.0F,10.0F,0.0F);
- // wing.modelise(cam);
+  wing.modelise(posXwingX,posXwingY,cam);
   glDisable(GL_LIGHT1);
 
   glPopMatrix();
 
 
-  if (destructionOn == 0) {
+ /* if (destructionOn == 0) {
 	  etoile.dessineEtoile();
   }
   else {
 	  //  etoile.dessineEtoile();
 	  etoile.destructionEtoile(diametreTorus, deplaSphereExplo);
-  }
+  }*/
   
-  //tr.modelise(20);
+  tr.modelise(20);
   
   /*
   if (img) {
@@ -168,11 +173,15 @@ void display(void) {
   glLightfv(GL_LIGHT2,GL_POSITION,light2_position);
   glPushMatrix();
 
-  //camera troisieme personne 
-  //gluLookAt(0.0, 20.0, cam + 20, 0.0, 0.0, cam - 20, 0.0, 1.0, 0.0);
-
+  if (changementCam == 0) {
+	  //camera troisieme personne 
+	  gluLookAt(0.0, 20.0, cam + 20, 0.0, 0.0, cam - 20, 0.0, 1.0, 0.0);
+  } else {
+	  //camera 1er personne
+	  gluLookAt(-posXwingX, posXwingY+13.0 , cam - 2, -posXwingX, posXwingY + 13.0, cam - 30, 0.0, 1.0, 0.0);
+  }
   //camera vu etoile noir pour destruction
-  gluLookAt(0.0, 20.0, -80.0, 0.0, 0.0, 20.0, 0.0, 1.0, 0.0);
+  //gluLookAt(0.0, 20.0, -80.0, 0.0, 0.0, 20.0, 0.0, 1.0, 0.0);
   scene();
   glPopMatrix();
   glFlush();
@@ -238,19 +247,27 @@ void keyboard(unsigned char key,int x,int y) {
 	  exit(0);
 
   case 'd':
-	  r0 = r0+0.5;
+	  if (-posXMax < posXwingX) {
+		  posXwingX--;
+	  }
 	  break;
 
   case 'q':
-	  r0 =r0-0.5;
+	  if (posXMax > posXwingX) {
+		  posXwingX++;
+	  }
 	  break;
 
   case 's':
-	  r1=r1+0.5;
+	  if (-posYMax < posXwingY) {
+		  posXwingY--;
+	  }
 	  break;
 
   case 'z':
-	  r1=r1-0.5;
+	  if (posYMax > posXwingY) {
+		  posXwingY++;
+	  }
 	  break;
   case 't':
 	  r5 = 0.0f;
@@ -262,6 +279,14 @@ void keyboard(unsigned char key,int x,int y) {
   case 'l':
 	  destructionOn = 0;
 	  diametreTorus = 10.0;
+	  break;
+
+  case 'c':
+	  if (changementCam == 0) {
+		  changementCam = 1;
+	  } else {
+		  changementCam = 0;
+	  }
 	  break;
   }
 }

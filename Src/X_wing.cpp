@@ -6,9 +6,9 @@
 #include <GL/glu.h>
 #include <math.h>
 
-void X_wing::modelise(double pos){
+void X_wing::modelise(double posX,double posY,double posZ){
 	glPushMatrix();
-	glTranslatef(0.0F,0.0F,-pos);
+	glTranslatef(posX,posY,-posZ);
 	base();
 	glPopMatrix();
 }
