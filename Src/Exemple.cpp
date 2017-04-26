@@ -39,10 +39,15 @@ static const float rouge[] = { 1.0F,0.0F,0.0F,1.0F };
 static const float vert[] = { 0.0F,1.0F,0.0F,1.0F };
 static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
 
+static float diametreTorus = 10.0F;
+static int destructionOn = 0;
+static float deplaSphereExplo = 0.0F;
+
 static float cam = 20.0f;
 Trench tr = Trench(cam + 10, cam);
 Tourelle t1 = Tourelle();
 X_wing wing = X_wing();
+EtoileNoir etoile = EtoileNoir(0.0, 0.0, 0.0);
 
 unsigned char *img;
 int rx, ry;
@@ -104,15 +109,21 @@ void scene(void) {
   glEnable(GL_LIGHT1);
   glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
   glTranslatef(0.0F,10.0F,0.0F);
-  wing.modelise(cam);
+ // wing.modelise(cam);
   glDisable(GL_LIGHT1);
 
   glPopMatrix();
 
 
-  //EtoileNoir et = EtoileNoir();
+  if (destructionOn == 0) {
+	  etoile.dessineEtoile();
+  }
+  else {
+	  //  etoile.dessineEtoile();
+	  etoile.destructionEtoile(diametreTorus, deplaSphereExplo);
+  }
   
-  tr.modelise(20);
+  //tr.modelise(20);
   
   /*
   if (img) {
@@ -156,7 +167,12 @@ void display(void) {
   glLightfv(GL_LIGHT1,GL_POSITION,light1_position);
   glLightfv(GL_LIGHT2,GL_POSITION,light2_position);
   glPushMatrix();
-  gluLookAt(0.0, 20.0, cam + 20, 0.0, 0.0, cam - 20, 0.0, 1.0, 0.0);
+
+  //camera troisieme personne 
+  //gluLookAt(0.0, 20.0, cam + 20, 0.0, 0.0, cam - 20, 0.0, 1.0, 0.0);
+
+  //camera vu etoile noir pour destruction
+  gluLookAt(0.0, 20.0, -80.0, 0.0, 0.0, 20.0, 0.0, 1.0, 0.0);
   scene();
   glPopMatrix();
   glFlush();
@@ -182,6 +198,11 @@ void idle(void) {
 
   if (r5 > 300) { r5 = 0.0f; wing.r = r5; }
   else { r5 += 8.0f; wing.r = r5; }
+
+  if (destructionOn == 1) {
+	  diametreTorus += 0.2;
+	  deplaSphereExplo += 0.01;
+  }
 
   cam = cam - 2;
   tr.addPos(2);
@@ -234,6 +255,13 @@ void keyboard(unsigned char key,int x,int y) {
   case 't':
 	  r5 = 0.0f;
 	  t1.tir= true;
+	  break;
+  case 'k':
+	  destructionOn = 1;
+	  break;
+  case 'l':
+	  destructionOn = 0;
+	  diametreTorus = 10.0;
 	  break;
   }
 }
