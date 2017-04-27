@@ -41,6 +41,8 @@ static const float bleu[] = { 0.0F,0.0F,1.0F,1.0F };
 
 static float diametreTorus = 10.0F;
 static int destructionOn = 0;
+static int animOn = 0;
+static float attenteExplo = 0.0f;
 static float deplaSphereExplo = 0.0F;
 static int changementCam = 0;
 static double posXwingX = 0.0;
@@ -104,31 +106,39 @@ void init(void) {
 /* Scene dessinee                               */
 void scene(void) {
   glPushMatrix();
-  //glRotatef(90.0F,0.0F,1.0F,0.0F);
-  glRotatef(r0,0.0F,1.0F,0.0F);
-  glRotatef(r1, 1.0F, 0.0F, 0.0F);
- 
-  //Positionnement du x-wing
-  glPushMatrix();
-
-  glEnable(GL_LIGHT1);
-  glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-  glTranslatef(0.0F,10.0F,0.0F);
-  wing.modelise(posXwingX,posXwingY,cam);
-  glDisable(GL_LIGHT1);
-
-  glPopMatrix();
 
 
- /* if (destructionOn == 0) {
+  if (animOn == 0) {
+	  //glRotatef(90.0F,0.0F,1.0F,0.0F);
+	  glRotatef(r0, 0.0F, 1.0F, 0.0F);
+	  glRotatef(r1, 1.0F, 0.0F, 0.0F);
+
+	  //Positionnement du x-wing
+	  glPushMatrix();
+
+	  glEnable(GL_LIGHT1);
+	  glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+	  glTranslatef(0.0F, 10.0F, 0.0F);
+	  wing.modelise(posXwingX, posXwingY, cam);
+	  glDisable(GL_LIGHT1);
+
+	  glPopMatrix();
+
+	  tr.modelise(20);
+
+  }
+
+  
+
+  if (destructionOn == 0 && animOn == 1) {
 	  etoile.dessineEtoile();
   }
   else {
 	  //  etoile.dessineEtoile();
 	  etoile.destructionEtoile(diametreTorus, deplaSphereExplo);
-  }*/
+  }
   
-  tr.modelise(20);
+  
   
   /*
   if (img) {
@@ -208,14 +218,30 @@ void idle(void) {
   if (r5 > 300) { r5 = 0.0f; wing.r = r5; }
   else { r5 += 8.0f; wing.r = r5; }
 
+  if (cam <= -400) {
+	  animOn = 1;
+	  cam = 20.0f;
+  }
+
+  if (animOn == 1) {
+	  attenteExplo += 1.0f;
+  }
+
+  if (attenteExplo >= 100.0f) {
+	  destructionOn = 1;
+  }
+
   if (destructionOn == 1) {
 	  diametreTorus += 0.2;
 	  deplaSphereExplo += 0.01;
   }
 
-  cam = cam - 2;
+  if (animOn == 0) {
+	  cam = cam - 2;
+  }
   tr.addPos(2);
   glutPostRedisplay();
+
 }
 
 /* Fonction executee lors d'un changement       */
@@ -275,10 +301,11 @@ void keyboard(unsigned char key,int x,int y) {
 	  break;
   case 'k':
 	  destructionOn = 1;
+	  cam = 0.0;
 	  break;
   case 'l':
-	  destructionOn = 0;
-	  diametreTorus = 10.0;
+	  //destructionOn = 0;
+	  //diametreTorus = 10.0;
 	  break;
 
   case 'c':
