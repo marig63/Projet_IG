@@ -6,7 +6,6 @@ class X_wing
 public:
 	float r;
 	Tir t1;
-	Tir t2;
 	bool tir = true;
 
 	X_wing();

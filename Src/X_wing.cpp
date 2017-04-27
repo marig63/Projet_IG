@@ -95,7 +95,7 @@ void X_wing::canon(){
 		tirer();
 		glDisable(GL_LIGHT2);
 	}
-	/////////////
+
 	
 
 	glTranslatef(0.0F, 2.4F, 0.0F);
@@ -121,7 +121,6 @@ void X_wing::canon(){
 
 void X_wing::tirer() {
 	t1.dessineTir();
-	t2.dessineTir();
 }
 
 void X_wing::cockpit() {
