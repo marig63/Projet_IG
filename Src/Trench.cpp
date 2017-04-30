@@ -9,11 +9,15 @@
 
 float pos;
 float posCam;
+int i = 1;
+int cpt = 1;
+float dist = 0.0f;
 
 Trench::Trench(float position, float cam)
 {
 	pos = position;
 	posCam = cam;
+	dist = pos+30 ;
 }
 
 
@@ -29,16 +33,13 @@ void Trench::addPos(float val)
 
 void Trench::modelise(float p)
 {
-	printf("pos: %f  pasCam: %f\n", pos, posCam);
 	if (pos - posCam <= 170) {
 		for (int i = 0; i < 8; i++) {
 
 			Ensemble1(pos - i * 20);
 			tourelle(i);
+			
 		}
-
-		
-
 
 		//on construit le prochain morceau
 		if (pos - posCam >= 20) {
@@ -51,18 +52,36 @@ void Trench::modelise(float p)
 	}
 	else {
 		pos = posCam + 10;
+		
+		cpt++;
+		if (cpt % 3 == 0) {
+			i--;
+			dist = pos;
+		}
 	}
 	
 }
 
 void Trench ::tourelle(int ind) {
+	
 	if (ind == 7) {
 		// ajout d'une tourelle
 		glPushMatrix();
-		glTranslatef(-10.0f, 5.0f, pos - ind * 35);
+		if (i % 2 == 0) {
+			glTranslatef(-10.0f, 5.0f,  (dist  - 190));
+		}
+		else {
+			glTranslatef(10.0f, 5.0f, (dist -190));
+		}
+		
 		glRotatef(90.0, 0.0f, 1.0f, 0.0f);
 		Tourelle t1 = Tourelle();
-		t1.dessineTourelle(5.0, 3.0, r);
+		if (i % 2 == 0) {
+			t1.dessineTourelle(5.0, 3.0, r);
+		}
+		else {
+			t1.dessineTourelle(5.0, -3.0, r);
+		}
 		glPopMatrix();
 		//
 	}

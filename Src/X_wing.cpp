@@ -15,6 +15,7 @@ void X_wing::modelise(double posX,double posY,double posZ){
 
 X_wing::X_wing() {
 	r = 0.0f;
+	tir = false;
 }
 
 
@@ -96,6 +97,7 @@ void X_wing::canon(){
 		glDisable(GL_LIGHT2);
 	}
 
+
 	
 
 	glTranslatef(0.0F, 2.4F, 0.0F);
@@ -106,16 +108,7 @@ void X_wing::canon(){
 	glPopMatrix();
 
 	FormeGeometrique::mySolidCylindre(2.0F, 0.1F, 36);
-	/*
-	t1 = Tir(r, 7, 1);
-
-	if (tir) {
-		glEnable(GL_LIGHT2);
-		tirer();
-		glDisable(GL_LIGHT2);
-	}
-
-	*/
+	
 	glPopMatrix();
 }
 

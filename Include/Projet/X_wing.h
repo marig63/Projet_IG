@@ -6,7 +6,7 @@ class X_wing
 public:
 	float r;
 	Tir t1;
-	bool tir = true;
+	bool tir;
 
 	X_wing();
 	~X_wing();

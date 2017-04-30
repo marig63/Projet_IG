@@ -218,9 +218,13 @@ void idle(void) {
   if (r5 > 300) { r5 = 0.0f; wing.r = r5; }
   else { r5 += 8.0f; wing.r = r5; }
 
-  if (cam <= -400) {
+  if (cam <= -4000) {
 	  animOn = 1;
 	  cam = 20.0f;
+  }
+
+  if (cam < -3800) {
+	  wing.tir = true;
   }
 
   if (animOn == 1) {
