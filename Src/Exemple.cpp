@@ -231,12 +231,12 @@ void idle(void) {
 	  attenteExplo += 1.0f;
   }
 
-  if (attenteExplo >= 100.0f) {
+  if (attenteExplo >= 1000.0f) {
 	  destructionOn = 1;
   }
 
   if (destructionOn == 1) {
-	  diametreTorus += 0.2;
+	  diametreTorus += 0.1;
 	  deplaSphereExplo += 0.01;
   }
 
