@@ -68,10 +68,10 @@ void Trench ::tourelle(int ind) {
 		// ajout d'une tourelle
 		glPushMatrix();
 		if (i % 2 == 0) {
-			glTranslatef(-10.0f, 5.0f,  (dist  - 190));
+			glTranslatef(-15.0f, 5.0f,  (dist  - 190));
 		}
 		else {
-			glTranslatef(10.0f, 5.0f, (dist -190));
+			glTranslatef(15.0f, 5.0f, (dist -190));
 		}
 		
 		glRotatef(90.0, 0.0f, 1.0f, 0.0f);
