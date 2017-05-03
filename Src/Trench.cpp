@@ -90,41 +90,57 @@ void Trench ::tourelle(int ind) {
 
 void Trench::Ensemble1(float position)
 {
-	glPushMatrix();
-	//glScalef(2.0f, 2.0f, 1.0f);
-
-	glTranslatef(-10.0f, 0.0f,  position);
-	Base1();
 
 	glPushMatrix();
-	glTranslatef(-19.0f, 20.0f, 0.0f);
-	Base1();
-	glPopMatrix();
-
-	glTranslatef(20.0f, 0.0f, 0.0f);
-	glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-	Base1();
 
 	glPushMatrix();
-	glTranslatef(0.0f, 20.0f, 19.0f);
+	glTranslatef(0.0f, 0.0f, position);
 	Base1();
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(0.0f, 10.0f, 10.0f);
-	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+	glTranslatef(-20.0f, 0.0f, position);
 	Base1();
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(0.0f, 10.0f, -30.0f);
-	glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+	glTranslatef(20.0f, 0.0f, position);
+	Base1();
+	glPopMatrix();
+
+
+	glPushMatrix();
+	glTranslatef(-39.0f, 20.0f, position);
+	glRotatef(90, 0.0f, 1.0f, 0.0f);
+	Base1();
+	glPopMatrix();
+
+
+	glPushMatrix();
+	glTranslatef(39.0f, 20.0f, position);
+	glRotatef(90, 0.0f, 1.0f, 0.0f);
+	Base1();
+	glPopMatrix();
+
+
+	glPushMatrix();
+	glTranslatef(-30.0f, 10.0f, position);
+	glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+	Base1();
+	glPopMatrix();
+
+
+
+	glPushMatrix();
+	glTranslatef(30.0f, 10.0f, position);
+	glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
 	Base1();
 	glPopMatrix();
 
 
 
 	glPopMatrix();
+
 }
 
 void Trench::Base1()
