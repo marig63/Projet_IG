@@ -52,12 +52,11 @@ static double posXMax = 10.0;
 static double rotateEtoile = 0.0F;
 
 static float cam = 20.0f;
-Trench tr = Trench(cam + 10, cam);
-Tourelle t1 = Tourelle();
+Trench tr = Trench();
 X_wing wing = X_wing();
-EtoileNoir etoile = EtoileNoir(0.0, 0.0, 0.0);
+EtoileNoir etoile = EtoileNoir();
 
-unsigned char *img;
+
 int rx, ry;
 
 /* Fonction d'initialisation des parametres     */
@@ -102,6 +101,14 @@ void init(void) {
   glMaterialfv(GL_FRONT, GL_SHININESS, shininess);*/
 
 
+  char* fichiers[5] = { "M1.png","M2.png","M3.png","M4.png","M5.png" };
+  
+
+
+  tr = Trench(5,fichiers,cam + 10, cam);
+  wing = X_wing(5, fichiers);
+  etoile = EtoileNoir(0.0, 0.0, 0.0);
+
 }
 
 /* Scene dessinee                               */
@@ -117,12 +124,12 @@ void scene(void) {
 	  //Positionnement du x-wing
 	  glPushMatrix();
 
-	  glEnable(GL_LIGHT1);
+	  //glEnable(GL_LIGHT1);
 	  glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
 	  glTranslatef(0.0F, 10.0F, 0.0F);
 	  wing.modelise(posXwingX, posXwingY, cam);
-	  glDisable(GL_LIGHT1);
-
+	  //glDisable(GL_LIGHT1);
+	  
 	  glPopMatrix();
 
 	  tr.modelise(20);
@@ -142,32 +149,7 @@ void scene(void) {
 	  //  etoile.dessineEtoile();
 	  etoile.destructionEtoile(diametreTorus, deplaSphereExplo);
   }
-  
-  
-  
-  /*
-  if (img) {
-	  glTexImage2D(GL_TEXTURE_2D, 0, 3, rx, ry, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
-	  //free(img);
-  }
-  printf("%d %d\n", rx, ry);
-  glEnable(GL_TEXTURE_2D);
-  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-
-  
-  glScalef(0.2 , 0.2, 0.2);
-  
-  t1.dessineTourelle(5.0, 0.0 ,r5);
-  //glRotatef(90.0, 0.0f, 0.0f, 1.0f);
-  //Tir t = Tir(r5, 1.0f, 1.0f, 0.0f);
-  
-  */
 
   glPopMatrix();
 
@@ -223,12 +205,12 @@ void idle(void) {
   if (r5 > 300) { r5 = 0.0f; wing.r = r5; }
   else { r5 += 8.0f; wing.r = r5; }
 
-  if (cam <= -100) {
+  if (cam <= -2000) {
 	  animOn = 1;
 	  cam = 20.0f;
   }
 
-  if (cam < -80) {
+  if (cam < -1800) {
 	  wing.tir = true;
   }
 
@@ -306,7 +288,6 @@ void keyboard(unsigned char key,int x,int y) {
 	  break;
   case 't':
 	  r5 = 0.0f;
-	  t1.tir= true;
 	  break;
   case 'k':
 	  destructionOn = 1;
@@ -336,7 +317,7 @@ int main(int argc,char **argv) {
   glutInitWindowPosition(50,50);
   glutCreateWindow("X-wing");
 
-  img = chargeImagePng("testure.png", &rx, &ry);
+  //img = chargeImagePng("testure.png", &rx, &ry);
 
   init();
   glutKeyboardFunc(keyboard);
@@ -345,6 +326,6 @@ int main(int argc,char **argv) {
   glutDisplayFunc(display);
   glutMainLoop();
 
-  free(img);
+  //free(img);
   return(0);
 }

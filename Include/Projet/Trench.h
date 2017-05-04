@@ -3,8 +3,12 @@ class Trench
 {
 public:
 	float r;
+	int nbFichiers;
+	char **images;
+	unsigned int *texId;
 
-	Trench(float position, float cam);
+	Trench(int nbFichiers, char **images,float position, float cam);
+	Trench();
 	~Trench();
 
 

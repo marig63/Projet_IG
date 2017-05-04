@@ -1,11 +1,16 @@
 #include "Projet\Trench.h"
+#include <stdlib.h>
 #include "Projet\FormeGeometrique.h"
 #include "Projet\Tourelle.h"
+#include "PNG\ChargePngFile.h"
+#include "PNG\Image.h"
+#include "PNG\PngFile.h"
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <math.h>
 #include <stdio.h>
+
 
 float pos;
 float posCam;
@@ -13,8 +18,36 @@ int i = 1;
 int cpt = 1;
 float dist = 0.0f;
 
-Trench::Trench(float position, float cam)
+
+Trench::Trench()
 {
+}
+
+Trench::Trench(int nbFichiers, char **images,float position, float cam)
+{
+	/* Configuration des textures utilisees */
+	glEnable(GL_TEXTURE_2D);
+	texId = (unsigned int *)calloc(5, sizeof(unsigned int));
+	glGenTextures(5, texId);
+	for (int i = 0; i < 5; i++) {
+		glBindTexture(GL_TEXTURE_2D, texId[i]);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		int rx;
+		int ry;
+		unsigned char *img = chargeImagePng(images[i], &rx, &ry);
+		if (img) {
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, rx, ry, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
+			free(img);
+		}
+	}
+	/* Fin configuration des textures       */
+
+	this->images = images;
+	this->nbFichiers = nbFichiers;
 	pos = position;
 	posCam = cam;
 	dist = pos+30 ;
@@ -33,11 +66,13 @@ void Trench::addPos(float val)
 
 void Trench::modelise(float p)
 {
+	glBindTexture(GL_TEXTURE_2D, texId[2]);
 	if (pos - posCam <= 170) {
 		for (int i = 0; i < 8; i++) {
 
 			Ensemble1(pos - i * 20);
 			tourelle(i);
+			glBindTexture(GL_TEXTURE_2D, texId[2]);
 			
 		}
 
@@ -47,6 +82,7 @@ void Trench::modelise(float p)
 
 				Ensemble1((pos - 160) - i * 20);
 				tourelle(i);
+				glBindTexture(GL_TEXTURE_2D, texId[2]);
 			}
 		}
 	}
@@ -65,6 +101,7 @@ void Trench::modelise(float p)
 void Trench ::tourelle(int ind) {
 	
 	if (ind == 7) {
+		glBindTexture(GL_TEXTURE_2D, texId[3]);
 		// ajout d'une tourelle
 		glPushMatrix();
 		if (i % 2 == 0) {
@@ -75,7 +112,7 @@ void Trench ::tourelle(int ind) {
 		}
 		
 		glRotatef(90.0, 0.0f, 1.0f, 0.0f);
-		Tourelle t1 = Tourelle();
+		Tourelle t1 = Tourelle(texId);
 		if (i % 2 == 0) {
 			t1.dessineTourelle(5.0, 3.0, r);
 		}

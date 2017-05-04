@@ -1,5 +1,10 @@
 #include "Projet\X_wing.h"
 #include "Projet\FormeGeometrique.h"
+#include <stdlib.h>
+
+#include "PNG\ChargePngFile.h"
+#include "PNG\Image.h"
+#include "PNG\PngFile.h"
 #include <stdio.h>
 #include <GL/glut.h>
 #include <GL/gl.h>
@@ -13,6 +18,31 @@ void X_wing::modelise(double posX,double posY,double posZ){
 	glPopMatrix();
 }
 
+X_wing::X_wing(int nbFichiers, char **images) {
+	/* Configuration des textures utilisees */
+	glEnable(GL_TEXTURE_2D);
+	texId = (unsigned int *)calloc(5, sizeof(unsigned int));
+	glGenTextures(5, texId);
+	for (int i = 0; i < 5; i++) {
+		glBindTexture(GL_TEXTURE_2D, texId[i]);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		int rx;
+		int ry;
+		unsigned char *img = chargeImagePng(images[i], &rx, &ry);
+		if (img) {
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, rx, ry, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
+			free(img);
+		}
+	}
+	/* Fin configuration des textures       */
+	r = 0.0f;
+	tir = false;
+}
+
 X_wing::X_wing() {
 	r = 0.0f;
 	tir = false;
@@ -24,6 +54,7 @@ X_wing::~X_wing()
 }
 
 void X_wing::aile() {
+	glBindTexture(GL_TEXTURE_2D, texId[1]);
 	glPushMatrix();
 
 	glBegin(GL_POLYGON);
@@ -64,6 +95,7 @@ void X_wing::aile() {
 }
 
 void X_wing::reacteur() {
+	glBindTexture(GL_TEXTURE_2D, texId[1]);
 	glPushMatrix();
 	glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
 	//avant du réacteur
@@ -77,6 +109,7 @@ void X_wing::reacteur() {
 }
 
 void X_wing::canon(){
+	glBindTexture(GL_TEXTURE_2D, texId[1]);
 	glPushMatrix();
 	glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
 	glTranslatef(0.0F, -0.4F, 0.0F);
@@ -86,6 +119,7 @@ void X_wing::canon(){
 	glTranslatef(0.0F, 4.0F, 0.0F);
 	FormeGeometrique::mySolidCylindre(4.0F, 0.2F, 36);
 
+	glBindTexture(GL_TEXTURE_2D, texId[0]);
 	t1 = Tir(r, 7, 1);
 
 	if (tir) {
@@ -93,6 +127,8 @@ void X_wing::canon(){
 		tirer();
 		glDisable(GL_LIGHT2);
 	}
+
+	glBindTexture(GL_TEXTURE_2D, texId[1]);
 
 	glTranslatef(0.0F, 2.4F, 0.0F);
 
@@ -111,6 +147,7 @@ void X_wing::tirer() {
 }
 
 void X_wing::cockpit() {
+	glBindTexture(GL_TEXTURE_2D, texId[1]);
 	double hauteur = 18.0F;
 	double ns = 6.0F;
 	double rayon = 2.5F;
@@ -183,6 +220,8 @@ void X_wing::cockpit() {
 }
 
 void X_wing::base() {
+
+	glBindTexture(GL_TEXTURE_2D, texId[1]);
 	glPushMatrix();
 
 	glScalef(0.8F, 0.8F, 0.8F);

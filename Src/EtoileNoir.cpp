@@ -6,6 +6,11 @@
 #include <math.h>
 #include <time.h>
 
+EtoileNoir::EtoileNoir() {
+	posX = 0;
+	posY = 0;
+	posZ = 0;
+}
 
 EtoileNoir::EtoileNoir(double x,double y,double z) {
 	posX = x;

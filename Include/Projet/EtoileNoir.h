@@ -12,6 +12,7 @@ private:
 public:
 
 	EtoileNoir(double posX, double posY, double posZ);
+	EtoileNoir();
 	~EtoileNoir();
 	void dessineEtoile();
 	void destructionEtoile(double diametreTorus,double depla);

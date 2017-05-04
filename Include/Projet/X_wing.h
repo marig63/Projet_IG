@@ -7,7 +7,11 @@ public:
 	float r;
 	Tir t1;
 	bool tir;
+	int nbFichiers;
+	char **images;
+	unsigned int *texId;
 
+	X_wing(int nbFichiers, char **images);
 	X_wing();
 	~X_wing();
 

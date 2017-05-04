@@ -8,12 +8,13 @@ private:
 	double rot;
 	Tir t1;
 	Tir t2;
+	unsigned int *texId;
 	
 
 public:
 	bool tir = true;
 
-	Tourelle();
+	Tourelle(unsigned int *texId);
 	Tourelle(double taille,double rotTete);
 	~Tourelle();
 

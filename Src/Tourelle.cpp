@@ -7,10 +7,11 @@
 #include <GL/glu.h>
 #include <math.h>
 
-Tourelle::Tourelle()
+Tourelle::Tourelle(unsigned int *texId)
 {
 	size = 4.0;
 	rot = 0.0f;
+	this->texId = texId;
 }
 
 Tourelle::Tourelle(double taille,double rotTete)
@@ -24,6 +25,7 @@ Tourelle::~Tourelle()
 }
 
 void Tourelle::dessineTourelle(double taille, double rotTete,float avanceeTir) {
+	glBindTexture(GL_TEXTURE_2D, texId[4]);
 	size = taille;
 	rot = rotTete;
 
@@ -50,13 +52,16 @@ void Tourelle::dessineTourelle(double taille, double rotTete,float avanceeTir) {
 	FormeGeometrique::mySolidCylindre(size, size / 8, 10);
 	//glRotatef(40.0, 0.0f, 0.0f, 1.0f);
 	
+	glBindTexture(GL_TEXTURE_2D, texId[0]);
 	t1 = Tir(avanceeTir, 7,1);
 
 	if (tir) {
-		glEnable(GL_LIGHT2);
+		//glEnable(GL_LIGHT2);
 		tirer();
-		glDisable(GL_LIGHT2);
+		//glDisable(GL_LIGHT2);
 	}
+
+	glBindTexture(GL_TEXTURE_2D, texId[4]);
 	
 
 	glPopMatrix();
@@ -69,14 +74,15 @@ void Tourelle::dessineTourelle(double taille, double rotTete,float avanceeTir) {
 	FormeGeometrique::mySolidCylindre(size, size / 8, 10);
 	//glRotatef(40.0, 0.0f, 0.0f, 1.0f);
 	
+	glBindTexture(GL_TEXTURE_2D, texId[0]);
 	t2 = Tir(avanceeTir,7,1);
 	if (tir) {
-		glEnable(GL_LIGHT2);
+		//glEnable(GL_LIGHT2);
 		tirer();
-		glDisable(GL_LIGHT2);
+		//glDisable(GL_LIGHT2);
 	}
 	
-
+	glBindTexture(GL_TEXTURE_2D, texId[4]);
 	glPopMatrix();
 
 	glScalef(size,size, size);
