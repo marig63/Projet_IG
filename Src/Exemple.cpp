@@ -49,6 +49,7 @@ static double posXwingX = 0.0;
 static double posXwingY = 0.0;
 static double posYMax = 4.0;
 static double posXMax = 10.0;
+static double rotateEtoile = 0.0F;
 
 static float cam = 20.0f;
 Trench tr = Trench(cam + 10, cam);
@@ -131,7 +132,11 @@ void scene(void) {
   
 
   if (destructionOn == 0 && animOn == 1) {
+	  glPushMatrix();
+	  glScalef(1.6F,1.6F,1.6F);
+	  glRotatef(rotateEtoile,0.0F,1.0F,0.0F);
 	  etoile.dessineEtoile();
+	  glPopMatrix();
   }
   else {
 	  //  etoile.dessineEtoile();
@@ -218,20 +223,21 @@ void idle(void) {
   if (r5 > 300) { r5 = 0.0f; wing.r = r5; }
   else { r5 += 8.0f; wing.r = r5; }
 
-  if (cam <= -4000) {
+  if (cam <= -100) {
 	  animOn = 1;
 	  cam = 20.0f;
   }
 
-  if (cam < -3800) {
+  if (cam < -80) {
 	  wing.tir = true;
   }
 
   if (animOn == 1) {
+	  rotateEtoile += 0.1F;
 	  attenteExplo += 1.0f;
   }
 
-  if (attenteExplo >= 1000.0f) {
+  if (attenteExplo >= 500.0f) {
 	  destructionOn = 1;
   }
 
@@ -266,7 +272,6 @@ void reshape(int x,int y) {
 /* d'une touche alphanumerique du clavier       */
 
 void keyboard(unsigned char key,int x,int y) {
-  printf("K\n");
   switch (key) {
   case 0x0D:
   { static int anim = 1;
