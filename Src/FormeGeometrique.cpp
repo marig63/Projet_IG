@@ -28,10 +28,15 @@ void FormeGeometrique::mySolidCylindre(double hauteur, double rayon, int ns) {
 		float a = (2 * M_PI *i) / ns;
 		float cs = cos(a);
 		float sn = -sin(a);
+		glTexCoord2f(0.0f, 1.0f);
 		glNormal3f(cs, 0.0F, sn);
 		float x = rayon*cs;
 		float z = rayon*sn;
+		glTexCoord2f(1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(x, hauteur, z);
+
+		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(x, -hauteur, z);
 	}
 	glEnd();
@@ -40,9 +45,19 @@ void FormeGeometrique::mySolidCylindre(double hauteur, double rayon, int ns) {
 		float a = (2 * M_PI *i) / ns;
 		float cs = cos(a);
 		float sn = -sin(a);
+
+
+		glTexCoord2f(cs, sn);
+
 		glNormal3f(cs, 0.0F, sn);
 		float x = rayon*cs;
 		float z = rayon*sn;
+
+		float tcs = cs * 0.5 + 0.5;
+		float tsn = sn * 0.5 + 0.5;
+
+		glTexCoord2f(tcs, tsn);
+
 		glVertex3f(x, hauteur, z);
 	}
 	glEnd();
@@ -51,9 +66,16 @@ void FormeGeometrique::mySolidCylindre(double hauteur, double rayon, int ns) {
 		float a = (2 * M_PI *i) / ns;
 		float cs = cos(a);
 		float sn = -sin(a);
+
+		glTexCoord2f(cs, sn);
 		glNormal3f(cs, 0.0F, sn);
 		float x = rayon*cs;
 		float z = rayon*sn;
+
+
+		float tcs = cs * 0.5 + 0.5;
+		float tsn = sn * 0.5 + 0.5;
+		glTexCoord2f(tcs, tsn);
 		glVertex3f(x, -hauteur, z);
 	}
 	glEnd();
@@ -76,10 +98,14 @@ void FormeGeometrique::myDemiCylindre(double hauteur, double rayon, int ns) {
 		float a = (2 * M_PI *i) / ns;
 		float cs = cos(a);
 		float sn = -sin(a);
+		glTexCoord2f(0.0f, 1.0f);
 		glNormal3f(cs, 0.0F, sn);
 		float x = rayon*cs;
 		float z = rayon*sn;
+		glTexCoord2f(1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(x, hauteur, z);
+		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(x, -hauteur, z);
 	}
 	glEnd();

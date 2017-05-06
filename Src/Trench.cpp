@@ -45,6 +45,7 @@ Trench::Trench(int nbFichiers, char **images,float position, float cam)
 		}
 	}
 	/* Fin configuration des textures       */
+	glDisable(GL_TEXTURE_2D);
 
 	this->images = images;
 	this->nbFichiers = nbFichiers;

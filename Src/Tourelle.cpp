@@ -69,13 +69,15 @@ void Tourelle::dessineTourelle(double taille, double rotTete,float avanceeTir) {
 	glPushMatrix();
 	glRotatef(90.0, 0.0f, 0.0f, 1.0f);
 	glTranslatef(0.0f, 0.8f*size, -0.3f*size);
+	glBindTexture(GL_TEXTURE_2D, texId[4]);
 	FormeGeometrique::mySolidCylindre(1.5*size, size / 5, 16);
 	glTranslatef(0.0f, 0.4f*size, 0.0f);
+	glBindTexture(GL_TEXTURE_2D, texId[4]);
 	FormeGeometrique::mySolidCylindre(size, size / 8, 10);
 	//glRotatef(40.0, 0.0f, 0.0f, 1.0f);
 	
 	glBindTexture(GL_TEXTURE_2D, texId[0]);
-	t2 = Tir(avanceeTir,7,1);
+	t1 = Tir(avanceeTir,7,1);
 	if (tir) {
 		//glEnable(GL_LIGHT2);
 		tirer();
@@ -100,5 +102,5 @@ void Tourelle::dessineTourelle(double taille, double rotTete,float avanceeTir) {
 
 void Tourelle::tirer() {
 	t1.dessineTir();
-	t2.dessineTir();
+	//t2.dessineTir();
 }

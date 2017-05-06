@@ -7,7 +7,7 @@ private:
 	double size;
 	double rot;
 	Tir t1;
-	Tir t2;
+	//Tir t2;
 	unsigned int *texId;
 	
 

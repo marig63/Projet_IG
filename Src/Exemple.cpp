@@ -58,14 +58,14 @@ EtoileNoir etoile = EtoileNoir();
 
 
 int rx, ry;
-
+GLfloat l_pos[] = { 1.0,1.0,1.0,0.0 };
 /* Fonction d'initialisation des parametres     */
 /* OpenGL ne changeant pas au cours de la vie   */
 /* du programme                                 */
 
 
 
-void init(void) {
+void init(void) {/*
   const GLfloat shininess[] = { 50.0 };
   glMaterialfv(GL_FRONT,GL_SPECULAR,blanc);
   glMaterialfv(GL_FRONT,GL_SHININESS,shininess);
@@ -88,7 +88,24 @@ void init(void) {
   glDepthFunc(GL_LESS);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_NORMALIZE);
-  glEnable(GL_AUTO_NORMAL);
+  glEnable(GL_AUTO_NORMAL);*/
+
+	GLfloat l_pos[] = { 1.0,1.0,1.0,0.0 };
+	const GLfloat shininess[] = { 50.0 };
+	glMaterialfv(GL_FRONT, GL_SPECULAR, blanc);
+	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+	glLightfv(GL_LIGHT0, GL_POSITION, l_pos);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, blanc);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, blanc);
+	glLightfv(GL_LIGHT2, GL_DIFFUSE, bleu);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	//glEnable(GL_LIGHT1);
+	//glEnable(GL_LIGHT2);
+	glDepthFunc(GL_LESS);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_NORMALIZE);
+	glEnable(GL_AUTO_NORMAL);
 
   /*
   GLfloat pos[] = { 0.0F,0.0F,-1.0F,0.0F };
@@ -124,11 +141,12 @@ void scene(void) {
 	  //Positionnement du x-wing
 	  glPushMatrix();
 
-	  //glEnable(GL_LIGHT1);
+	  glEnable(GL_LIGHT1);
+	  glLightfv(GL_LIGHT0, GL_POSITION, l_pos);
 	  glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
 	  glTranslatef(0.0F, 10.0F, 0.0F);
 	  wing.modelise(posXwingX, posXwingY, cam);
-	  //glDisable(GL_LIGHT1);
+	  glDisable(GL_LIGHT1);
 	  
 	  glPopMatrix();
 
@@ -140,6 +158,7 @@ void scene(void) {
 
   if (destructionOn == 0 && animOn == 1) {
 	  glPushMatrix();
+	  glLightfv(GL_LIGHT0, GL_POSITION, l_pos);
 	  glScalef(1.6F,1.6F,1.6F);
 	  glRotatef(rotateEtoile,0.0F,1.0F,0.0F);
 	  etoile.dessineEtoile();
