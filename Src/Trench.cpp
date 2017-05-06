@@ -189,7 +189,7 @@ void Trench::Base1()
 
 	glPushMatrix();
 	glScalef(20.0f, 2.0f, 20.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 	glTranslatef(0.0f, 1.0f, 0.0f);
 
@@ -201,7 +201,7 @@ void Trench::Base1()
 	glPushMatrix();
 	glTranslatef(-3.5f, 0.0f, -8.5f);
 	glScalef(3.0f, 1.0f, 1.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
@@ -213,7 +213,7 @@ void Trench::Base1()
 	glPushMatrix();
 	glTranslatef(-3.5f, 0.0f, -5.5f);
 	glScalef(3.0f, 1.0f, 1.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 	
 	glPushMatrix();
@@ -221,25 +221,25 @@ void Trench::Base1()
 	FormeGeometrique::mySolidCylindre(1.0F, 2.5F, 36);
 
 	glScalef(4.0f, 1.5f, 1.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(0.0f, 0.0f, -2.0f);
 	glScalef(2.0f, 1.0f, 1.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glTranslatef(0.0f, 0.0f, -1.5f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glTranslatef(0.0f, 0.0f, -1.5f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glTranslatef(0.0f, 0.0f, -1.5f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(3.5f, 0.0f, -5.5f);
 	glScalef(3.0f, 1.0f, 3.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 
 	glTranslatef(0.2f, 0.1f, -0.2f);
 	FormeGeometrique::mySolidCylindre(1.0F, 0.2F, 36);
@@ -248,51 +248,51 @@ void Trench::Base1()
 	glPushMatrix();
 	glTranslatef(3.0f, 0.0f, -9.0f);
 	glScalef(3.0f, 2.0f, 2.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(5.5f, 0.0f, -9.0f);
 	glScalef(1.0f, 2.0f, 2.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(8.5f, 0.0f, -7.5f);
 	glScalef(3.0f, 3.0f, 3.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(9.0f, 0.0f, -8.5f);
 	glScalef(2.0f, 4.0f, 1.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(7.5f, 0.0f, -2.5f);
 	glScalef(3.0f, 1.0f, 5.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(6.5f, 0.0f, -3.0f);
 	glScalef(1.0f, 2.0f, 2.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glTranslatef(2.0f, 0.0f, 0.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(5.5f, 0.0f, 5.0f);
 	glScalef(7.0f, 1.0f, 8.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(5.5f, 0.0f, 5.0f);
 	glScalef(3.0f, 2.5f, 6.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
@@ -303,53 +303,53 @@ void Trench::Base1()
 	glPushMatrix();
 	glTranslatef(8.0f, 0.0f, 3.5f);
 	glScalef(2.0f, 2.5f, 1.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glTranslatef(0.0f, 0.0f, 2.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glTranslatef(0.0f, 0.0f, 2.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-8.0f, 0.0f, 8.0f);
 	glScalef(2.0f, 1.5f, 4.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-5.5f, 0.0f, 9.0f);
 	glScalef(3.0f, 1.0f, 2.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-8.0f, 0.0f, 4.0f);
 	glScalef(2.0f, 1.0f, 2.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-4.5f, 0.0f, 4.5f);
 	glScalef(3.0f, 1.0f, 3.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-5.5f, 0.0f, 4.5f);
 	glScalef(1.0f, 1.5f, 2.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-3.5f, 0.0f, 4.5f);
 	glScalef(1.0f, 1.5f, 3.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-1.5f, 0.0f, 5.5f);
 	glScalef(1.0f, 1.5f, 5.0f);
-	glutSolidCube(1);
+	FormeGeometrique::mySolidCube();
 	glPopMatrix();
 
 	glPushMatrix();

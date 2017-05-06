@@ -1,5 +1,8 @@
 #include "Projet\EtoileNoir.h"
 #include "Projet\FormeGeometrique.h"
+#include "PNG\ChargePngFile.h"
+#include "PNG\Image.h"
+#include "PNG\PngFile.h"
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -12,7 +15,34 @@ EtoileNoir::EtoileNoir() {
 	posZ = 0;
 }
 
-EtoileNoir::EtoileNoir(double x,double y,double z) {
+EtoileNoir::EtoileNoir(int nbFichiers, char **images, double x,double y,double z) {
+
+	/* Configuration des textures utilisees */
+	glEnable(GL_TEXTURE_2D);
+	texId = (unsigned int *)calloc(5, sizeof(unsigned int));
+	glGenTextures(5, texId);
+	for (int i = 0; i < 5; i++) {
+		glBindTexture(GL_TEXTURE_2D, texId[i]);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		int rx;
+		int ry;
+		unsigned char *img = chargeImagePng(images[i], &rx, &ry);
+		if (img) {
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, rx, ry, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
+			free(img);
+		}
+	}
+	/* Fin configuration des textures       */
+	//glDisable(GL_TEXTURE_2D);
+
+	this->images = images;
+	this->nbFichiers = nbFichiers;
+
+
 	posX = x;
 	posY = y;
 	posZ = z;
@@ -20,6 +50,7 @@ EtoileNoir::EtoileNoir(double x,double y,double z) {
 
 
 void EtoileNoir::dessineEtoile() {
+	glBindTexture(GL_TEXTURE_2D, texId[2]);
 	double equ3[] = { 0.0F,-4.0F,-8.0F,87.5F };
 	double equ2[] = { 0.0F,-4.0F,-8.0F,84.0F };
 	//plan pour la demi sphere haute 
@@ -35,7 +66,7 @@ void EtoileNoir::dessineEtoile() {
 	glPushMatrix();
 	glEnable(GL_CLIP_PLANE0);
 	glEnable(GL_CLIP_PLANE3);
-	glutSolidSphere(10.0F, 36.0F, 36.0F);
+	FormeGeometrique::mySolidSphere(10.0F, 36.0F, 36.0F);
 	glDisable(GL_CLIP_PLANE0);
 	glDisable(GL_CLIP_PLANE3);
 	glPopMatrix();
@@ -43,7 +74,7 @@ void EtoileNoir::dessineEtoile() {
 	//sphere central
 	glClipPlane(GL_CLIP_PLANE4, equ4);
 	glEnable(GL_CLIP_PLANE4);
-	glutSolidSphere(9.5F, 36.0F, 36.0F);
+	FormeGeometrique::mySolidSphere(9.5F, 36.0F, 36.0F);
 	glDisable(GL_CLIP_PLANE4);
 
 	//plan pour la demi-sphere basse
@@ -54,7 +85,7 @@ void EtoileNoir::dessineEtoile() {
 	glPushMatrix();
 
 	glEnable(GL_CLIP_PLANE1);
-	glutSolidSphere(10.0F, 36.0F, 36.0F);
+	FormeGeometrique::mySolidSphere(10.0F, 36.0F, 36.0F);
 	glDisable(GL_CLIP_PLANE1);
 	glPopMatrix();
 
@@ -66,7 +97,7 @@ void EtoileNoir::dessineEtoile() {
 	glPushMatrix();
 	glEnable(GL_CLIP_PLANE2);
 	glTranslatef(0.0F, 5.0F, 11.0F);
-	glutSolidSphere(4.0F, 36.0F, 36.0F);
+	FormeGeometrique::mySolidSphere(4.0F, 36.0F, 36.0F);
 	glDisable(GL_CLIP_PLANE2);
 	glPopMatrix();
 
@@ -76,23 +107,23 @@ void EtoileNoir::dessineEtoile() {
 void EtoileNoir::destructionEtoile(double diametreTorus,double depla) {
 	
 	glPushMatrix();
-
+	glBindTexture(GL_TEXTURE_2D, texId[1]);
+	glColor3f(1.0f, 1.0f, 0.0f);
 	glTranslatef(posX,posY,posZ);
 
 	glPushMatrix();
 	glRotatef(90.0F,1.0F,0.0F,0.0F);
 	glScalef(diametreTorus, diametreTorus, 5.0F);
-	glutSolidTorus(0.1F,1.0,36,36);
+	FormeGeometrique::mySolidTorus(0.1F,1.0,36,36);
 	glPopMatrix();
 
 	
 	for (int i = 0; i < nbSphereExplo;i++) {
 		glPushMatrix();
 		//glTranslatef(explosionX[i]+depla,explosionY[i]+depla,explosionZ[i]+depla);
-		//glutSolidSphere(0.5,36,36);
+		//FormeGeometrique::mySolidSphere(0.5,36,36);
 		glPopMatrix();
 	}
-	
 	glPopMatrix();
 }
 

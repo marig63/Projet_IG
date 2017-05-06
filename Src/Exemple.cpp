@@ -124,7 +124,7 @@ void init(void) {/*
 
   tr = Trench(5,fichiers,cam + 10, cam);
   wing = X_wing(5, fichiers);
-  etoile = EtoileNoir(0.0, 0.0, 0.0);
+  etoile = EtoileNoir(5, fichiers,0.0, 0.0, 0.0);
 
 }
 
@@ -227,6 +227,7 @@ void idle(void) {
   if (cam <= -2000) {
 	  animOn = 1;
 	  cam = 20.0f;
+	  changementCam = 0;
   }
 
   if (cam < -1800) {

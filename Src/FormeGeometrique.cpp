@@ -225,3 +225,68 @@ void FormeGeometrique::mySolidCube() {
 
 	glEnd();
 }
+
+void FormeGeometrique::mySolidSphere(float rayon, int nlat, int nlon) {
+	for (int i = 0; i < nlat; i++) {
+		float a1 = -M_PI / 2.0F + i*M_PI / nlat;
+		float a2 = a1 + M_PI / nlat;
+		float cs1 = cos(a1);
+		float cs2 = cos(a2);
+		float sn1 = sin(a1);
+		float sn2 = sin(a2);
+		float t1 = 1.0F - (float)i / nlat;
+		float t2 = 1.0F - (float)(i + 1) / nlat;
+		glBegin(GL_QUAD_STRIP);
+		for (int j = 0; j <= nlon; j++) {
+			float a = j * 2 * M_PI / nlon;
+			float x1 = cs1*cos(a);
+			float z1 = cs1*sin(a);
+			float x2 = cs2*cos(a);
+			float z2 = cs2*sin(a);
+			float s = 1.0F - (float)j / nlon;
+			glTexCoord2f(s, t1);
+			glNormal3f(x1, sn1, z1);
+			glVertex3f(rayon*x1, rayon*sn1, rayon*z1);
+			glTexCoord2f(s, t2);
+			glNormal3f(x2, sn2, z2);
+			glVertex3f(rayon*x2, rayon*sn2, rayon*z2);
+		}
+		glEnd();
+	}
+}
+
+void FormeGeometrique::mySolidTorus(double r , double c ,
+	int rSeg, int cSeg)
+{
+	glFrontFace(GL_CW);
+
+	//glBindTexture(GL_TEXTURE_2D, texture);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+	const double PI = 3.1415926535897932384626433832795;
+	const double TAU = 2 * PI;
+
+	for (int i = 0; i < rSeg; i++) {
+		glBegin(GL_QUAD_STRIP);
+		for (int j = 0; j <= cSeg; j++) {
+			for (int k = 0; k <= 1; k++) {
+				double s = (i + k) % rSeg + 0.5;
+				double t = j % (cSeg + 1);
+
+				double x = (c + r * cos(s * TAU / rSeg)) * cos(t * TAU / cSeg);
+				double y = (c + r * cos(s * TAU / rSeg)) * sin(t * TAU / cSeg);
+				double z = r * sin(s * TAU / rSeg);
+
+				double u = (i + k) / (float)rSeg;
+				double v = t / (float)cSeg;
+
+				glTexCoord2d(u, v);
+				glNormal3f(2 * x, 2 * y, 2 * z);
+				glVertex3d(2 * x, 2 * y, 2 * z);
+			}
+		}
+		glEnd();
+	}
+
+	glFrontFace(GL_CCW);
+}

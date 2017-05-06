@@ -8,10 +8,13 @@ class EtoileNoir
 {
 private:
 	double posX, posY, posZ;
+	int nbFichiers;
+	char **images;
+	unsigned int *texId;
 
 public:
 
-	EtoileNoir(double posX, double posY, double posZ);
+	EtoileNoir(int nbFichiers, char **images,double posX, double posY, double posZ);
 	EtoileNoir();
 	~EtoileNoir();
 	void dessineEtoile();

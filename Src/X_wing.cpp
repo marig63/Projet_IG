@@ -54,38 +54,73 @@ X_wing::~X_wing()
 }
 
 void X_wing::aile() {
-	glBindTexture(GL_TEXTURE_2D, texId[1]);
+	glBindTexture(GL_TEXTURE_2D, texId[3]);
 	glPushMatrix();
 
 	glBegin(GL_POLYGON);
 	{
+		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(-4.0F, 0.4F, -2.0F);
+
+		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(4.0F, 0.2F, -1.0F);
+
+		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(4.0F, 0.2F, 1.0F);
+
+		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(-4.0F, 0.4F, 2.0F);
 	}
 	{
+		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(-4.0F, -0.4F, -2.0F);
+
+		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(4.0F, -0.2F, -1.0F);
+
+		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(4.0F, -0.2F, 1.0F);
+
+		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(-4.0F, -0.4F, 2.0F);
 	}
 	{
+		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(-4.0F, 0.4F, 2.0F);
+
+		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(4.0F, 0.2F, 1.0F);
+
+		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(4.0F, -0.2F, 1.0F);
+
+		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(-4.0F, -0.4F, 2.0F);
 	}
 	{
+		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(-4.0F, 0.4F, -2.0F);
+
+		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(4.0F, 0.2F, -1.0F);
+
+		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(4.0F, -0.2F, -1.0F);
+
+		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(-4.0F, -0.4F, -2.0F);
 	}
 	{
+		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(4.0F,0.2F, 1.0F);
+
+		glTexCoord2f(1.0f, 0.0f);
 		glVertex3f(4.0F, 0.2F, -1.0F);
+		glTexCoord2f(0.0f, 0.0f);
+		
 		glVertex3f(4.0F, -0.2F, -1.0F);
+
+		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(4.0F, 0.2F, 1.0F);
 	}
 	
@@ -95,7 +130,7 @@ void X_wing::aile() {
 }
 
 void X_wing::reacteur() {
-	glBindTexture(GL_TEXTURE_2D, texId[1]);
+	glBindTexture(GL_TEXTURE_2D, texId[3]);
 	glPushMatrix();
 	glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
 	//avant du réacteur
@@ -109,7 +144,7 @@ void X_wing::reacteur() {
 }
 
 void X_wing::canon(){
-	glBindTexture(GL_TEXTURE_2D, texId[1]);
+	glBindTexture(GL_TEXTURE_2D, texId[3]);
 	glPushMatrix();
 	glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
 	glTranslatef(0.0F, -0.4F, 0.0F);
@@ -128,7 +163,7 @@ void X_wing::canon(){
 		glDisable(GL_LIGHT2);
 	}
 
-	glBindTexture(GL_TEXTURE_2D, texId[1]);
+	glBindTexture(GL_TEXTURE_2D, texId[3]);
 
 	glTranslatef(0.0F, 2.4F, 0.0F);
 
@@ -147,7 +182,7 @@ void X_wing::tirer() {
 }
 
 void X_wing::cockpit() {
-	glBindTexture(GL_TEXTURE_2D, texId[1]);
+	glBindTexture(GL_TEXTURE_2D, texId[3]);
 	double hauteur = 18.0F;
 	double ns = 6.0F;
 	double rayon = 2.5F;
@@ -167,14 +202,18 @@ void X_wing::cockpit() {
 		float a = (2 * M_PI *i) / ns;
 		float cs = cos(a);
 		float sn = -sin(a);
+		glTexCoord2f(0.0f, 1.0f);
 		glNormal3f(cs, 0.0F, sn);
 		float x = rayon*cs;
 		float z = rayon*sn;
 
 		float z1 = rayon / 3 * sn;
 		float x1 = rayon / 3 * cs;
-
+		glTexCoord2f(1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(x1, hauteur, z1);
+
+		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(x, -hauteur, z);
 	}
 	glEnd();
@@ -200,14 +239,17 @@ void X_wing::cockpit() {
 		float a = (2 * M_PI *i) / ns;
 		float cs = cos(a);
 		float sn = -sin(a);
+		glTexCoord2f(0.0f, 1.0f);
 		glNormal3f(cs, 0.0F, sn);
 		float x = rayon*cs;
 		float z = rayon*sn;
 
 		float x1 = 0.01F * cs;
 		float z1 = 0.01F * sn;
-
+		glTexCoord2f(1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(x1, hauteur, z1);
+		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(x, -hauteur, z);
 	}
 	glEnd();
@@ -221,7 +263,7 @@ void X_wing::cockpit() {
 
 void X_wing::base() {
 
-	glBindTexture(GL_TEXTURE_2D, texId[1]);
+	glBindTexture(GL_TEXTURE_2D, texId[3]);
 	glPushMatrix();
 
 	glScalef(0.8F, 0.8F, 0.8F);
