@@ -226,7 +226,11 @@ void FormeGeometrique::mySolidCube() {
 	glEnd();
 }
 
+
 void FormeGeometrique::mySolidSphere(float rayon, int nlat, int nlon) {
+	// http://raphaello.univ-fcomte.fr/ig/Td-Tp/2007-2008-Executables/SphereTexturee.htm
+	// cette fonction permet de dessiner une sphere et de prendre en compte les textures
+
 	for (int i = 0; i < nlat; i++) {
 		float a1 = -M_PI / 2.0F + i*M_PI / nlat;
 		float a2 = a1 + M_PI / nlat;
@@ -258,6 +262,8 @@ void FormeGeometrique::mySolidSphere(float rayon, int nlat, int nlon) {
 void FormeGeometrique::mySolidTorus(double r , double c ,
 	int rSeg, int cSeg)
 {
+	// https://gist.github.com/gyng/8939105
+	// Cette fonction permet de prendre en compte les textures avec un Tore
 	glFrontFace(GL_CW);
 
 	//glBindTexture(GL_TEXTURE_2D, texture);

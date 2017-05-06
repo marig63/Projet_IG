@@ -118,13 +118,13 @@ void init(void) {/*
   glMaterialfv(GL_FRONT, GL_SHININESS, shininess);*/
 
 
-  char* fichiers[5] = { "M1.png","M2.png","M3.png","M4.png","M5.png" };
+  char* fichiers[6] = { "M1.png","M2.png","M3.png","M4.png","M5.png","M6.png" };
   
 
 
-  tr = Trench(5,fichiers,cam + 10, cam);
-  wing = X_wing(5, fichiers);
-  etoile = EtoileNoir(5, fichiers,0.0, 0.0, 0.0);
+  tr = Trench(6,fichiers,cam + 10, cam);
+  wing = X_wing(6, fichiers);
+  etoile = EtoileNoir(6, fichiers,0.0, 0.0, 0.0);
 
 }
 

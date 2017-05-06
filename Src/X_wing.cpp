@@ -21,9 +21,9 @@ void X_wing::modelise(double posX,double posY,double posZ){
 X_wing::X_wing(int nbFichiers, char **images) {
 	/* Configuration des textures utilisees */
 	glEnable(GL_TEXTURE_2D);
-	texId = (unsigned int *)calloc(5, sizeof(unsigned int));
-	glGenTextures(5, texId);
-	for (int i = 0; i < 5; i++) {
+	texId = (unsigned int *)calloc(6, sizeof(unsigned int));
+	glGenTextures(6, texId);
+	for (int i = 0; i < 6; i++) {
 		glBindTexture(GL_TEXTURE_2D, texId[i]);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
@@ -154,7 +154,7 @@ void X_wing::canon(){
 	glTranslatef(0.0F, 4.0F, 0.0F);
 	FormeGeometrique::mySolidCylindre(4.0F, 0.2F, 36);
 
-	glBindTexture(GL_TEXTURE_2D, texId[0]);
+	glBindTexture(GL_TEXTURE_2D, texId[5]);
 	t1 = Tir(r, 7, 1);
 
 	if (tir) {

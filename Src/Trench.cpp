@@ -195,7 +195,7 @@ void Trench::Base1()
 
 	glPushMatrix();
 	glTranslatef(-8.0f, 0.0f, -8.0f);
-	glutSolidSphere(1, 36, 36);
+	FormeGeometrique::mySolidSphere(1, 36, 36);
 	glPopMatrix();
 
 	glPushMatrix();
