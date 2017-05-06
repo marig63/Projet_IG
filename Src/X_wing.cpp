@@ -30,6 +30,7 @@ X_wing::X_wing(int nbFichiers, char **images) {
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameterf(GL_TEXTURE_2D, GL_GENERATE_MIPMAP,GL_TRUE);
 		int rx;
 		int ry;
 		unsigned char *img = chargeImagePng(images[i], &rx, &ry);
@@ -56,7 +57,9 @@ X_wing::~X_wing()
 void X_wing::aile() {
 	glBindTexture(GL_TEXTURE_2D, texId[3]);
 	glPushMatrix();
-
+	GLfloat l_pos[] = { 1.0F, 1.0F, 0.0F,0.0F };
+	glEnable(GL_LIGHT2);
+	glLightfv(GL_LIGHT2, GL_POSITION,l_pos);
 	glBegin(GL_POLYGON);
 	{
 		glTexCoord2f(0.0f, 0.0f);
@@ -98,7 +101,7 @@ void X_wing::aile() {
 		glVertex3f(-4.0F, -0.4F, 2.0F);
 	}
 	{
-		glTexCoord2f(0.0f, 0.0f);
+		/*glTexCoord2f(0.0f, 0.0f);
 		glVertex3f(-4.0F, 0.4F, -2.0F);
 
 		glTexCoord2f(1.0f, 0.0f);
@@ -108,7 +111,7 @@ void X_wing::aile() {
 		glVertex3f(4.0F, -0.2F, -1.0F);
 
 		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(-4.0F, -0.4F, -2.0F);
+		glVertex3f(-4.0F, -0.4F, -2.0F);*/
 	}
 	{
 		glTexCoord2f(0.0f, 1.0f);
@@ -125,7 +128,7 @@ void X_wing::aile() {
 	}
 	
 	glEnd();
-
+	glDisable(GL_LIGHT2);
 	glPopMatrix();
 }
 

@@ -97,7 +97,7 @@ void init(void) {/*
 	glLightfv(GL_LIGHT0, GL_POSITION, l_pos);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, blanc);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, blanc);
-	glLightfv(GL_LIGHT2, GL_DIFFUSE, bleu);
+	glLightfv(GL_LIGHT2, GL_DIFFUSE, blanc);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	//glEnable(GL_LIGHT1);
