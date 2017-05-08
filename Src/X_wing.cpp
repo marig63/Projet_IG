@@ -112,7 +112,7 @@ void X_wing::aile() {
 
 		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(-4.0F, -0.4F, -2.0F);*/
-	}
+	} 
 	{
 		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(4.0F,0.2F, 1.0F);
