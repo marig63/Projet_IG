@@ -179,7 +179,7 @@ void scene(void) {
 
 void display(void) {
   //printf("D\n");
-  glClearColor(0.5F,0.5F,0.5F,0.5F);
+  glClearColor(0.0F,0.0F,0.0F,0.0F);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   const GLfloat light0_position[] = { 100.0,100.0,100.0,1.0 };
   const GLfloat light1_position[] = { -1.0,1.0,1.0,0.0 };
